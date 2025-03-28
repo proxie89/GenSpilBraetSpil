@@ -19,11 +19,11 @@ namespace ProjektGenspil
         public char stand { get { return _stand; } set { _stand = value; } }
         public int antalSpillere { get { return _antalSpillere; } set { _antalSpillere = value; } }
         public int antalPåLager { get { return _antalPåLager; } set { _antalPåLager = value; } }
-        public int pris { get { return _pris; } set { _pris = value; } }  
+        public int pris { get { return _pris; } set { _pris = value; } }
         public string genre { get { return _genre; } set { _genre = value; } }
-    
 
-    public brætspil(string navn, char stand, int antalSpillere, int antalPåLager, int pris, string genre)
+
+        public brætspil(string navn, char stand, int antalSpillere, int antalPåLager, int pris, string genre)
         {
             _navn = navn;
             _stand = stand;
@@ -34,4 +34,3 @@ namespace ProjektGenspil
         }
     }
 }
-
