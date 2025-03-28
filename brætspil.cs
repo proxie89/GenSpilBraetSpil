@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjektGenspil
 {
-    /* public class brætspil
+    public class brætspil
     {
         private string _navn;
         private char _stand;
@@ -23,11 +23,11 @@ namespace ProjektGenspil
 
     public class Variabler (string navn, char stand, int antalSpillere, int antalPåLager, int pris)
     {
-       this._navn = navn;
+        this._navn = navn;
         this._stand = stand;
         this._antalSpillere = antalSpillere;
         this._antalPåLager = antalPåLager;
         this._pris = pris;    
-       */
+       
 }
 
