@@ -13,12 +13,12 @@ namespace ProjektGenspil
             while (true)
             {
                 Console.Clear(); // Rydder skærmen for en ren menuvisning
-                Console.WriteLine("=== Hovedmenu ===");
-                Console.WriteLine("1. Tilføj navn til listen");
-                Console.WriteLine("2. Vis alle navne");
-                Console.WriteLine("3. Slet et navn");
+                Console.WriteLine("=== Hovedmenu ===\n");
+                Console.WriteLine("1. Tilføj brætspilsnavn til listen");
+                Console.WriteLine("2. Vis brætspilsliste");
+                Console.WriteLine("3. Slet et brætspilsnavn");
                 Console.WriteLine("4. Til forespørgsel menu");
-                Console.WriteLine("4. Afslut");
+                Console.WriteLine("5. Afslut");
                 Console.Write("Vælg en mulighed: ");
 
                 string input = Console.ReadLine();
@@ -53,7 +53,7 @@ namespace ProjektGenspil
         static void AddBoardGame()
         {
             Console.Clear();
-            Console.Write("Indtast et navn: ");
+            Console.Write("Indtast navn på Brætspil: ");
             string name = Console.ReadLine();
             if (!string.IsNullOrWhiteSpace(name))
             {
@@ -123,7 +123,7 @@ namespace ProjektGenspil
                 Console.WriteLine("2. Se liste med forespørgsler");
                 Console.WriteLine("3. Slet forespørgsel");
                 Console.WriteLine("4. Søg på forespørgsel");
-                Console.WriteLine("5. Afslut");
+                Console.WriteLine("5. Tilbage til Hovedmenu!");
                 Console.Write("Vælg en mulighed: ");
 
                 string input = Console.ReadLine();

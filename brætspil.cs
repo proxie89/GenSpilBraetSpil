@@ -6,24 +6,24 @@ using System.Threading.Tasks;
 
 namespace ProjektGenspil
 {
-    public class brætspil
+    public class Brætspil
     {
         private string _navn;
         private char _stand;
         private int _antalSpillere;
         private int _antalPåLager;
         private int _pris;
-        private string _genre;
+        private Genre _genre;
 
-        public string navn { get { return _navn; } set { _navn = value; } }
-        public char stand { get { return _stand; } set { _stand = value; } }
-        public int antalSpillere { get { return _antalSpillere; } set { _antalSpillere = value; } }
-        public int antalPåLager { get { return _antalPåLager; } set { _antalPåLager = value; } }
-        public int pris { get { return _pris; } set { _pris = value; } }
-        public string genre { get { return _genre; } set { _genre = value; } }
+        public string Navn { get { return _navn; } set { _navn = value; } }
+        public char Stand { get { return _stand; } set { _stand = value; } }
+        public int AntalSpillere { get { return _antalSpillere; } set { _antalSpillere = value; } }
+        public int AntalPåLager { get { return _antalPåLager; } set { _antalPåLager = value; } }
+        public int Pris { get { return _pris; } set { _pris = value; } }
+        public Genre Genre { get { return _genre; } set { _genre = value; } }
 
 
-        public brætspil(string navn, char stand, int antalSpillere, int antalPåLager, int pris, string genre)
+        public Brætspil(string navn, char stand, int antalSpillere, int antalPåLager, int pris, Genre genre)
         {
             _navn = navn;
             _stand = stand;
