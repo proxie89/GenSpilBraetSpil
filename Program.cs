@@ -16,7 +16,7 @@ namespace ProjektGenspil
                 Console.WriteLine("1. Tilføj navn til listen");
                 Console.WriteLine("2. Vis alle navne");
                 Console.WriteLine("3. Slet et navn");
-                Console.WriteLine("3. Afslut");
+                Console.WriteLine("4. Afslut");
                 Console.Write("Vælg en mulighed: ");
 
                 string input = Console.ReadLine();
@@ -24,13 +24,13 @@ namespace ProjektGenspil
                 switch (input)
                 {
                     case "1":
-                        AddName();
+                        AddBoardGame();
                         break;
                     case "2":
-                        ShowNames();
+                        PrintList();
                         break;
                     case "3":
-                        DeleteName();
+                        DeleteBoardGame();
                         break;
                     case "4":
                         Console.WriteLine("Farvel!");
@@ -45,7 +45,7 @@ namespace ProjektGenspil
             }
         }
 
-        static void AddName()
+        static void AddBoardGame()
         {
             Console.Clear();
             Console.Write("Indtast et navn: ");
@@ -61,7 +61,7 @@ namespace ProjektGenspil
             }
         }
 
-        static void ShowNames()
+        static void PrintList()
         {
             Console.Clear();
             Console.WriteLine("=== Liste over navne ===");
@@ -77,25 +77,34 @@ namespace ProjektGenspil
                 }
             }
         }
-
-        static void DeleteName()
+                
+        static void DeleteBoardGame()
         {
-            ShowNames();
+            PrintList();
             if (names.Count == 0)
             {
+                Console.WriteLine("Ingen navne at slette.");
                 return;
             }
 
-            Console.Write("Indtast nummeret på det navn, du vil slette: ");
-            if (int.TryParse(Console.ReadLine(), out int index) && index > 0 && index <= names.Count)
+            int index;
+            while (true)
             {
-                string removedName = names[index - 1];
-                names.RemoveAt(index - 1);
-                Console.WriteLine($"\"{removedName}\" er blevet slettet.");
-            }
-            else
-            {
-                Console.WriteLine("Ugyldigt valg. Prøv igen.");
+                Console.Write("Indtast nummeret på det navn, du vil slette: ");
+                string input = Console.ReadLine();
+
+                
+                Console.WriteLine($"Input: {input}");
+
+                /*if { }
+                
+
+                }
+
+                else
+                {
+                    Console.WriteLine("Ugyldigt valg. Prøv igen.");
+                }*/
             }
         }
 
