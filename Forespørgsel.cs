@@ -8,5 +8,6 @@ namespace ProjektGenspil
 {
     internal class Forespørgsel
     {
+        
     }
 }
