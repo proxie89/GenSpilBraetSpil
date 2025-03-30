@@ -133,7 +133,7 @@ namespace ProjektGenspil
         {
             // tilføj søge funktion
             //Spørg bruger hvilket ID han leder efter
-            Console.WriteLine("Hvilken forespørgsel leder du efter?");
+            Console.WriteLine("Indtast ID for den forespørgsel du vil søge på:"); //ændrede teksten her, da det ikke var tydeligt hvad man skulle taste. (exception error)
             // Indtast brugerens ID
             int søgtID = int.Parse(Console.ReadLine());
 
