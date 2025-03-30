@@ -22,7 +22,7 @@ namespace ProjektGenspil
          * Strategispil
          * Voksenspil
          * 
-         * Et spil kan tilhøre flere genrer...
+         * Et spil kan tilhøre flere Genrer...
          */
         private string _navn;
 

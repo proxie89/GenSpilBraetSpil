@@ -64,5 +64,20 @@ namespace ProjektGenspil
         {
             return Navn + " | " + Stand.Niveau + " | " + AntalSpillere + " | " + AntalPåLager + " | " + Pris + " | " + Genre.Navn;
         }
+
+        public static Brætspil FromString(string line)
+        {
+            string[] lineParts = line.Split(" | ");  // Her splittes linjen i tekstfilen op i 6 dele.
+
+            string navn = lineParts[0];
+            Stand stand = BrætspilMenuer.GetNiveauForStand(char.Parse(lineParts[1]));
+            string antalSpillere = lineParts[2];
+            int antalPåLager = int.Parse(lineParts[3]);
+            decimal pris = decimal.Parse(lineParts[4]);
+            Genre genre = BrætspilMenuer.GetNavnForGenre(lineParts[5]);  // Laves på samme måde som GetNiveauForStand.
+
+            Brætspil brætspil = new Brætspil(navn, stand, antalSpillere, antalPåLager, pris, genre);  // Her laves et brætspilsobjekt ud fra de 3 dele.
+            return brætspil;
+        }
     }
 }
