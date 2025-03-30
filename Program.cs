@@ -11,7 +11,7 @@ namespace ProjektGenspil
             {
                 Console.Clear(); // Rydder skærmen for en ren menuvisning
                 Console.WriteLine("=== Hovedmenu ===\n");
-                Console.WriteLine("1. Tilføj brætspilsnavn til listen\n");
+                Console.WriteLine("1. Tilføj brætspil til listen\n");
                 Console.WriteLine("2. Vis brætspilsliste\n");
                 Console.WriteLine("3. Slet et brætspilsnavn\n");
                 Console.WriteLine("4. Til forespørgselsmenuer\n");

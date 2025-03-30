@@ -16,14 +16,21 @@ namespace ProjektGenspil
          * mancalaspil (kalaha og mancala).
          * 
          * Eller:
+         *
          * Familiespil
          * Selskabsspil
          * Strategispil
+         * Voksenspil
          * 
          * Et spil kan tilhøre flere genrer...
          */
         private string _navn;
 
         public string Navn { get { return _navn; } set { _navn = value; } }
+
+        public Genre(string navn)
+        {
+            _navn = navn;
+        }
     }
 }
