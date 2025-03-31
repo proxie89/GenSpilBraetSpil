@@ -9,7 +9,7 @@ namespace ProjektGenspil
     internal class BrætspilMenuer
     {
         //static List<string> names = new List<string>(); // Liste til at gemme navne
-        static List<Brætspil> brætspilListe = new List<Brætspil>();
+        static List<Brætspil> brætspilsliste = new List<Brætspil>();
         public static List<Stand> Tilstande =
             [
                 new Stand('A', "Super stand - Næsten som nyt."),
@@ -27,50 +27,57 @@ namespace ProjektGenspil
             ];
         public static void AddBoardGame()
         {
-            Brætspil spil = new Brætspil();
             Console.Clear();
 
-            Console.Write("Indtast navn på Brætspil: ");
-            spil.Navn = Console.ReadLine();
-
-            Console.WriteLine("Indtast hvilken stand brætspillet er i. Vælg et af følgende bogstaver:\n");
-
-            for (int i = 0; i < Tilstande.Count(); i++)
+            Console.WriteLine("Hvor mange brætspil vil du indtaste?");
+            int antalSpil = int.Parse(Console.ReadLine());
+            for (int i = 0; i < antalSpil; i++)
             {
-                Console.WriteLine($"{Tilstande[i].Niveau} - {Tilstande[i].Beskrivelse}\n");
+                Brætspil spil = new Brætspil();
+
+                Console.Write("Indtast navn på Brætspil: ");
+                spil.Navn = Console.ReadLine();
+
+                Console.WriteLine("Indtast hvilken stand brætspillet er i. Vælg et af følgende bogstaver:\n");
+
+                for (int j = 0; j < Tilstande.Count(); j++)
+                {
+                    Console.WriteLine($"{Tilstande[j].Niveau} - {Tilstande[j].Beskrivelse}\n");
+                }
+                char niveau = char.Parse(Console.ReadLine().ToUpper());
+
+                spil.Stand = GetNiveauForStand(niveau);
+
+                if (spil.Stand == null)
+                {
+                    spil.Stand = Tilstande[0];
+                }
+
+                Console.Write("Indtast antal spillere for dette spil: ");
+                spil.AntalSpillere = Console.ReadLine();
+                spil.AntalPåLager = 1;
+
+                Console.Write("Sæt prisen på brætspillet (vurderes ud fra spillets tilstand): ");
+                spil.Pris = decimal.Parse(Console.ReadLine());
+
+                Console.WriteLine("Indtast hvilken genre brætspillet hører til. Vælg det som det som passer bedst:\n");
+
+                for (int j = 0; j < Genrer.Count(); j++)
+                {
+                    Console.WriteLine($"{j} - {Genrer[j].Navn}\n");
+                }
+                int nummer = int.Parse(Console.ReadLine());
+                spil.Genre = Genrer.ElementAtOrDefault(nummer);
+                if (spil.Genre == null)
+                {
+                    spil.Genre = Genrer[0];
+                }
+
+                brætspilsliste.Add(spil);
+                Console.WriteLine($"\"{spil.Navn}\" er tilføjet til listen og gemt.");
             }
-            char niveau = char.Parse(Console.ReadLine().ToUpper());
 
-            spil.Stand = GetNiveauForStand(niveau);
-
-            if (spil.Stand == null)
-            {
-                spil.Stand = Tilstande[0];
-            }
-
-            Console.Write("Indtast antal spillere for dette spil: ");
-            spil.AntalSpillere = Console.ReadLine();
-            spil.AntalPåLager = 1;
-
-            Console.Write("Sæt prisen på brætspillet (vurderes ud fra spillets tilstand): ");
-            spil.Pris = decimal.Parse(Console.ReadLine());
-
-            Console.WriteLine("Indtast hvilken genre brætspillet hører til. Vælg det som det som passer bedst:\n");
-
-            for (int i = 0; i < Genrer.Count(); i++)
-            {
-                Console.WriteLine($"{i} - {Genrer[i].Navn}\n");
-            }
-            int nummer = int.Parse(Console.ReadLine());
-            spil.Genre = Genrer.ElementAtOrDefault(nummer);
-            if (spil.Genre == null)
-            {
-                spil.Genre = Genrer[0];
-            }
-
-            brætspilListe.Add(spil);
             SaveBoardGames();
-            Console.WriteLine($"\"{spil.Navn}\" er tilføjet til listen og gemt.");
         }
 
         public static Stand GetNiveauForStand(char niveau)
@@ -100,15 +107,14 @@ namespace ProjektGenspil
         public static void PrintList()
         {
             Console.Clear();
-            LoadBoardGames();
             Console.WriteLine("=== Liste over navne ===\n");
-            if (brætspilListe.Count == 0)
+            if (brætspilsliste.Count == 0)
             {
                 Console.WriteLine("Ingen navne tilføjet endnu.");
             }
             else
             {
-                foreach (Brætspil brætspil in brætspilListe)
+                foreach (Brætspil brætspil in brætspilsliste)
                 {
                     //Console.WriteLine(brætspil.Navn);
                     //Console.WriteLine(brætspil.Stand);
@@ -120,7 +126,7 @@ namespace ProjektGenspil
         public static void DeleteBoardGame()
         {
             PrintList();
-            if (brætspilListe.Count == 0)
+            if (brætspilsliste.Count == 0)
             {
                 Console.WriteLine("Ingen navne at slette.");
                 return;
@@ -147,17 +153,16 @@ namespace ProjektGenspil
             }
         }
 
-        // SaveBoardGames og LoadBoardGames kunne lægges i en Lager-klasse sammen med brætspilListe.
+        // SaveBoardGames og LoadBoardGames kunne lægges i en Lager-klasse sammen med brætspilsliste.
         public static void SaveBoardGames()
         {
             /* LoadBoardGames er sat ind for at undgå, at linjen i filen overskrives med det nye brætspil. 
              * Dog sker der det, at hvis man tilføjer et brætspil mere, så kommer der dobbelt antal
              * fordi den loader igen. Ved ikke, hvilken løsning man hellere skal vælge?
              */
-            LoadBoardGames();
             using (StreamWriter sw = new StreamWriter("Brætspil.txt"))
             {
-                foreach (Brætspil brætspil in brætspilListe)
+                foreach (Brætspil brætspil in brætspilsliste)
                 {
                     sw.WriteLine(brætspil.ToString());
                 }
@@ -172,13 +177,13 @@ namespace ProjektGenspil
                 {
                     string line = sr.ReadLine();  // Her hentes næste linje i tekstfilen.
 
-                    if (line == null)
+                    if (line == null || line == "")
                     {
                         break;  // Break ud af loopet, når linjen er null (ingen linje).
                     }
 
                     Brætspil brætspil = Brætspil.FromString(line);
-                    brætspilListe.Add(brætspil);
+                    brætspilsliste.Add(brætspil);
                 }
             }  // Her lukkes tekstfilen. Fordi man nu er ude af kodeblokken.
         }
