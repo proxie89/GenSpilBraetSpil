@@ -7,6 +7,7 @@ namespace ProjektGenspil
     {
         static void Main()
         {
+            BrætspilMenuer.LoadBoardGames();
             while (true)
             {
                 Console.Clear(); // Rydder skærmen for en ren menuvisning
