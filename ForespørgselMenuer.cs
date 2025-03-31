@@ -68,6 +68,7 @@ namespace ProjektGenspil
                 Console.WriteLine("Indtast kundens telefonnummer");
                 int _tlf = int.Parse(Console.ReadLine());
 
+                // Forespørgselsnummer skal nok være et for loop, hvor i = 1, og herefter adder den til hver gang et nummer bliver oprettet
                 Console.WriteLine("Indtast forespørgsels ID" + (i + 1) + ": ");
                 int _id = int.Parse(Console.ReadLine());
 
@@ -127,6 +128,27 @@ namespace ProjektGenspil
         static void SletForespørgsel()
         {
             //Indsæt slet forespørgsel
+            Console.WriteLine("Indtast nummeret på den forespørgsel du ønsker at slette");
+            int tal = Convert.ToInt32(Console.ReadLine());
+
+            Forespørgsel forespørgselremove = null;
+            foreach (var forespørgsels in forespørgsel)
+            {
+                if (forespørgsels.Id == tal)
+                {
+                    forespørgselremove = forespørgsels;
+                    break;
+                }
+            }
+            if (forespørgselremove != null)
+            {
+                forespørgsel.Remove(forespørgselremove);
+                Console.WriteLine($"{tal} er blevet slettet");
+            }
+            else
+            {
+                Console.WriteLine("Forespørgsels ID ikke fundet");
+            }
         }
 
         public static void SøgForespørgsel()
