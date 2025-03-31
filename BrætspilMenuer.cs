@@ -117,35 +117,33 @@ namespace ProjektGenspil
             }
         }
 
-        public static void DeleteBoardGame()
+        public static void DeleteBoardGame(List<Brætspil> brætspilListe)
         {
-            PrintList();
-            if (brætspilListe.Count == 0)
+            Console.WriteLine("Vælg navn på det brætspil du vil slette: ");
+            string name = Console.ReadLine();
+
+            Brætspil brætSpilSlettes = null;
+            foreach (var brætspilListes in brætspilListe)
             {
-                Console.WriteLine("Ingen navne at slette.");
-                return;
-            }
-
-            int index;
-            while (true)
-            {
-                Console.Write("Indtast nummeret på det navn, du vil slette: ");
-                string input = Console.ReadLine();
-
-
-                Console.WriteLine($"Input: {input}");
-
-                /*if { }
-                
-
-                }
-
-                else
+                if (brætspilListes._navn == name)
                 {
-                    Console.WriteLine("Ugyldigt valg. Prøv igen.");
-                }*/
+                    brætSpilSlettes = brætspilListes;
+
+                    break;
+                }
+            }
+            if (brætSpilSlettes != null)
+            {
+                brætspilListe.Remove(brætSpilSlettes);
+                Console.WriteLine($"{name} er slettet");
+            } 
+            else
+            {
+                Console.WriteLine("Brætspil ikke fundet!");
             }
         }
+        
+        
 
         // SaveBoardGames og LoadBoardGames kunne lægges i en Lager-klasse sammen med brætspilListe.
         public static void SaveBoardGames()
