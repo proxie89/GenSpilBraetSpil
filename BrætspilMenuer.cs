@@ -39,7 +39,7 @@ namespace ProjektGenspil
             {
                 Console.WriteLine($"{Tilstande[i].Niveau} - {Tilstande[i].Beskrivelse}\n");
             }
-            char niveau = char.Parse(Console.ReadLine());
+            char niveau = char.Parse(Console.ReadLine().ToUpper());
 
             spil.Stand = GetNiveauForStand(niveau);
 
@@ -153,7 +153,7 @@ namespace ProjektGenspil
              * Dog sker der det, at hvis man tilføjer et brætspil mere, så kommer der dobbelt antal
              * fordi den loader igen. Ved ikke, hvilken løsning man hellere skal vælge?
              */
-            LoadBoardGames(); 
+            
             using (StreamWriter sw = new StreamWriter("Brætspil.txt"))
             {
                 foreach (Brætspil brætspil in brætspilListe)
