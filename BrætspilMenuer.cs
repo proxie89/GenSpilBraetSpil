@@ -100,6 +100,7 @@ namespace ProjektGenspil
         public static void PrintList()
         {
             Console.Clear();
+            LoadBoardGames();
             Console.WriteLine("=== Liste over navne ===\n");
             if (brætspilListe.Count == 0)
             {
@@ -153,7 +154,7 @@ namespace ProjektGenspil
              * Dog sker der det, at hvis man tilføjer et brætspil mere, så kommer der dobbelt antal
              * fordi den loader igen. Ved ikke, hvilken løsning man hellere skal vælge?
              */
-            
+            LoadBoardGames();
             using (StreamWriter sw = new StreamWriter("Brætspil.txt"))
             {
                 foreach (Brætspil brætspil in brætspilListe)
