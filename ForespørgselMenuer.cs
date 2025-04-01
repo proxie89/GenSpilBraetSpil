@@ -90,7 +90,13 @@ namespace ProjektGenspil
 
         public static void LoadForespørgsel()
         {
-            using (StreamReader sr = new StreamReader("Forespørgsler.txt"))
+            string filePath = "Forespørgsler.txt";
+            if (!File.Exists(filePath))
+            {
+                Console.WriteLine($"Filen blev ikke fundet: {filePath}");
+                return;
+            }
+            using (StreamReader sr = new StreamReader(filePath))
                 while (true)
                 {
                     string line = sr.ReadLine();
