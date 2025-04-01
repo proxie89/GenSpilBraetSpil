@@ -16,35 +16,13 @@ namespace ProjektGenspil
         private decimal _pris;  // Decimal, fordi det er ti-tals-systemet. Det bruges der til penge, hvor vi runder af til decimaler.
         private Genre _genre;
 
-        public string Navn 
-        { 
-            get { return _navn; }
-            set 
-            {
-                if (!string.IsNullOrWhiteSpace(value))
-                {
-                    _navn = value; 
-                }
-                else
-                {
-                    Console.WriteLine("Navnet kan ikke være tomt.");
-                }
-            } 
-        }
-        public Stand Stand 
-        { 
-            get { return _stand; } 
-            set 
-            { 
-                _stand = value; 
-            } 
-        }
+        public string Navn { get { return _navn; } set { _navn = value; } }
+        public Stand Stand { get { return _stand; } set { _stand = value; } }
         public string AntalSpillere { get { return _antalSpillere; } set { _antalSpillere = value; } }
         public int AntalPåLager { get { return _antalPåLager; } set { _antalPåLager = value; } }
         public decimal Pris { get { return _pris; } set { _pris = value; } }
         public Genre Genre { get { return _genre; } set { _genre = value; } }
 
-        public Brætspil() { }
         public Brætspil(string navn, Stand stand, string antalSpillere, int antalPåLager, decimal pris, Genre genre)
         {
             _navn = navn;

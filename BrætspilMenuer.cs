@@ -9,7 +9,7 @@ namespace ProjektGenspil
     internal class BrætspilMenuer
     {
         //static List<string> names = new List<string>(); // Liste til at gemme navne
-        static List<Brætspil> brætspilsliste = new List<Brætspil>();
+        private static List<Brætspil> brætspilsListe = new List<Brætspil>();
         public static List<Stand> Tilstande =
             [
                 new Stand('A', "Super stand - Næsten som nyt."),
@@ -33,10 +33,8 @@ namespace ProjektGenspil
             int antalSpil = int.Parse(Console.ReadLine());
             for (int i = 0; i < antalSpil; i++)
             {
-                Brætspil spil = new Brætspil();
-
                 Console.Write("Indtast navn på Brætspil: ");
-                spil.Navn = Console.ReadLine();
+                string navn = Console.ReadLine();
 
                 Console.WriteLine("Indtast hvilken stand brætspillet er i. Vælg et af følgende bogstaver:\n");
 
@@ -45,20 +43,15 @@ namespace ProjektGenspil
                     Console.WriteLine($"{Tilstande[j].Niveau} - {Tilstande[j].Beskrivelse}\n");
                 }
                 char niveau = char.Parse(Console.ReadLine().ToUpper());
-
-                spil.Stand = GetNiveauForStand(niveau);
-
-                if (spil.Stand == null)
-                {
-                    spil.Stand = Tilstande[0];
-                }
+                                
+                Stand stand = GetNiveauForStand(niveau) ?? Tilstande[0]; // ændret flow control til at være mere readable
 
                 Console.Write("Indtast antal spillere for dette spil: ");
-                spil.AntalSpillere = Console.ReadLine();
-                spil.AntalPåLager = 1;
+                string antalSpillere = Console.ReadLine();
+                int antalPåLager = 1;
 
                 Console.Write("Sæt prisen på brætspillet (vurderes ud fra spillets tilstand): ");
-                spil.Pris = decimal.Parse(Console.ReadLine());
+                decimal pris = decimal.Parse(Console.ReadLine());
 
                 Console.WriteLine("Indtast hvilken genre brætspillet hører til. Vælg det som det som passer bedst:\n");
 
@@ -67,13 +60,11 @@ namespace ProjektGenspil
                     Console.WriteLine($"{j} - {Genrer[j].Navn}\n");
                 }
                 int nummer = int.Parse(Console.ReadLine());
-                spil.Genre = Genrer.ElementAtOrDefault(nummer);
-                if (spil.Genre == null)
-                {
-                    spil.Genre = Genrer[0];
-                }
+                Genre genre = Genrer.ElementAtOrDefault(nummer) ?? Genrer[0]; // ændret flow control til at være mere readable
 
-                brætspilsliste.Add(spil);
+
+                Brætspil spil = new Brætspil(navn, stand, antalSpillere, antalPåLager, pris, genre);
+                brætspilsListe.Add(spil);
                 Console.WriteLine($"\"{spil.Navn}\" er tilføjet til listen og gemt.");
             }
 
@@ -108,13 +99,13 @@ namespace ProjektGenspil
         {
             Console.Clear();
             Console.WriteLine("=== Liste over navne ===\n");
-            if (brætspilsliste.Count == 0)
+            if (brætspilsListe.Count == 0)
             {
                 Console.WriteLine("Ingen navne tilføjet endnu.");
             }
             else
             {
-                foreach (Brætspil brætspil in brætspilsliste)
+                foreach (Brætspil brætspil in brætspilsListe)
                 {
                     //Console.WriteLine(brætspil.Navn);
                     //Console.WriteLine(brætspil.Stand);
@@ -123,33 +114,61 @@ namespace ProjektGenspil
             }
         }
 
-        public static void DeleteBoardGame(List<Brætspil> brætspilListe)
+
+
+        public static void DeleteBoardGame()
         {
-            Console.WriteLine("Vælg navn på det brætspil du vil slette: ");
-            string name = Console.ReadLine();
 
-            Brætspil brætSpilSlettes = null;
-            foreach (var brætspilListes in brætspilListe)
+            Console.Clear();
+            Console.WriteLine("Liste over brætspil:");
+
+            if (brætspilsListe.Count == 0)
             {
-                if (brætspilListes._navn == name)
-                {
-                    brætSpilSlettes = brætspilListes;
+                Console.WriteLine("Ingen brætspil i listen!");
+                Console.WriteLine("Tryk på en tast for at fortsætte...");
+                Console.ReadKey();
+                return;
+            }
 
-                    break;
+            // Display the list with 1-based indices
+            for (int i = 0; i < brætspilsListe.Count; i++)
+            {
+                var game = brætspilsListe[i];
+                Console.WriteLine($"[{i + 1}] {game.ToString()}");
+            }
+
+            Console.WriteLine("\nIndtast indeksnummeret på det brætspil, du vil slette: ");
+            string input = Console.ReadLine();
+
+            try
+            {
+                int index = int.Parse(input); // Convert input to integer
+                if (index >= 1 && index <= brætspilsListe.Count) // Check if index is in range
+                {
+                    int zeroBasedIndex = index - 1; // Convert to 0-based index
+                    string deletedName = brætspilsListe[zeroBasedIndex].Navn;
+                    brætspilsListe.RemoveAt(zeroBasedIndex);
+                    Console.WriteLine($"\"{deletedName}\" er slettet fra listen.");
+                }
+                else
+                {
+                    Console.WriteLine("Ugyldigt indeksnummer! Indtast et nummer mellem 1 og " + brætspilsListe.Count + ".");
                 }
             }
-            if (brætSpilSlettes != null)
+            catch (FormatException)
             {
-                brætspilListe.Remove(brætSpilSlettes);
-                Console.WriteLine($"{name} er slettet");
-            } 
-            else
-            {
-                Console.WriteLine("Brætspil ikke fundet!");
+                Console.WriteLine("Fejl: Du skal indtaste et heltal (f.eks. 1, 2, 3).");
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine("En uventet fejl opstod: " + ex.Message);
+            }
+
+            Console.WriteLine("Tryk på en tast for at fortsætte...");
+            Console.ReadKey();
         }
-        
-        
+
+
 
         // SaveBoardGames og LoadBoardGames kunne lægges i en Lager-klasse sammen med brætspilListe.
         public static void SaveBoardGames()
@@ -160,7 +179,7 @@ namespace ProjektGenspil
              */
             using (StreamWriter sw = new StreamWriter("Brætspil.txt"))
             {
-                foreach (Brætspil brætspil in brætspilsliste)
+                foreach (Brætspil brætspil in brætspilsListe)
                 {
                     sw.WriteLine(brætspil.ToString());
                 }
@@ -181,7 +200,7 @@ namespace ProjektGenspil
                     }
 
                     Brætspil brætspil = Brætspil.FromString(line);
-                    brætspilsliste.Add(brætspil);
+                    brætspilsListe.Add(brætspil);
                 }
             }  // Her lukkes tekstfilen. Fordi man nu er ude af kodeblokken.
         }
