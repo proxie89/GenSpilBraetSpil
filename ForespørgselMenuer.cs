@@ -78,31 +78,33 @@ namespace ProjektGenspil
             }
         }
 
-        /*
-        static void AddKunde()
+        
+        static void gemForespørgsel()
         {
-            
-            kunde.Add(new Kunde("Kathrine Jensen", 88776655));
-            kunde.Add(new Kunde("Bo Hansen", 99887766));
-
-            Console.Clear();
-            Console.WriteLine("Indtast kundens fulde navn");
-            string name = Console.ReadLine();
-            Console.WriteLine("Indtast telefonnummer på kunden");
-            int nummer = Convert.ToInt32(Console.ReadLine());
-
-            if ((!string.IsNullOrWhiteSpace(name)))
-            {
-                Kunde.Add(name); //Adder til "Kunde" listen
-                Kunde.Add(nummer);
-                Console.WriteLine($"{name} er tilføjet som kunde");
-            }
-            else
-            {
-                Console.WriteLine("Error. Prøv igen");
-            }
+           using(StreamWriter sw = new StreamWriter("Forespørgsler.txt"))
+                foreach (Forespørgsel forespørgsel in forespørgsel)
+                {
+                    sw.WriteLine(forespørgsel.ToString());
+                }
         }
-        */
+
+        public static void LoadForespørgsel()
+        {
+            using (StreamReader sr = new StreamReader("Forespørgsler.txt"))
+                while (true)
+                {
+                    string line = sr.ReadLine();
+
+                    if(line == null || line == "")
+                    {
+                        break;
+                    }
+
+                    Forespørgsel forespørgsels = Forespørgsel.FromString(line);
+                    forespørgsel.Add(forespørgsels); 
+                }
+        }
+        
         public static void SeListe()
         {
             // Udskriv liste med forespørgsler
@@ -161,6 +163,8 @@ namespace ProjektGenspil
 
             // Søg på person med det angivne ID
             Forespørgsel søgtForespørgsel = forespørgsel.Find(f => f.Id == søgtID);
+            // Se om man kan søge på navn; 
+
 
             //Udskriv nu det søgte ID's informationer
             if (søgtForespørgsel != null)
