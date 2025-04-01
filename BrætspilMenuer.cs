@@ -116,8 +116,11 @@ namespace ProjektGenspil
 
 
 
-        public static void DeleteBoardGame()
+        public static void DeleteBoardGame() 
         {
+            //mangler en funktion der fjerner spil fra .txt filen. Måske kan man kun overskrive filen uden den man vil slette.
+            //problemet er at man kan slette fra listen i koden, men funktionen til at fjerne spillet fra txt findes ikke.
+            //Dette gør at hver gang man ser listen af spil, er spillene ikke blevet fjernet. 
 
             Console.Clear();
             Console.WriteLine("Liste over brætspil:");
@@ -159,13 +162,7 @@ namespace ProjektGenspil
             {
                 Console.WriteLine("Fejl: Du skal indtaste et heltal (f.eks. 1, 2, 3).");
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("En uventet fejl opstod: " + ex.Message);
-            }
-
-            Console.WriteLine("Tryk på en tast for at fortsætte...");
-            Console.ReadKey();
+                    
         }
 
 
