@@ -130,7 +130,7 @@ namespace ProjektGenspil
                 return;
             }
 
-            // Display the list with 1-based indices
+            
             for (int i = 0; i < brætspilsListe.Count; i++)
             {
                 var game = brætspilsListe[i];
@@ -142,10 +142,10 @@ namespace ProjektGenspil
 
             try
             {
-                int index = int.Parse(input); // Convert input to integer
-                if (index >= 1 && index <= brætspilsListe.Count) // Check if index is in range
+                int index = int.Parse(input); 
+                if (index >= 1 && index <= brætspilsListe.Count) 
                 {
-                    int zeroBasedIndex = index - 1; // Convert to 0-based index
+                    int zeroBasedIndex = index - 1; 
                     string deletedName = brætspilsListe[zeroBasedIndex].Navn;
                     brætspilsListe.RemoveAt(zeroBasedIndex);
                     Console.WriteLine($"\"{deletedName}\" er slettet fra listen.");
