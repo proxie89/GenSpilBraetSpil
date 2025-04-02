@@ -8,7 +8,7 @@ namespace ProjektGenspil
 {
     internal class ForespørgselMenuer
     {
-        static List<Forespørgsel> forespørgsel = new List<Forespørgsel>(); //Til forespørgsler
+        public static List<Forespørgsel> forespørgsel = new List<Forespørgsel>(); //Til forespørgsler
 
         public static void ForespørgselMenu()
         {
@@ -79,13 +79,15 @@ namespace ProjektGenspil
         }
 
         
-        public static void gemForespørgsel()
+        public static void GemForespørgsel()
         {
-           using(StreamWriter sw = new StreamWriter("Forespørgsler.txt"))
+            using (StreamWriter swf = new StreamWriter("Forespørgsler.txt"))
+            {
                 foreach (Forespørgsel forespørgsel in forespørgsel)
                 {
-                    sw.WriteLine(forespørgsel.ToString());
+                    swf.WriteLine(forespørgsel.ToString());
                 }
+            }
         }
 
         public static void LoadForespørgsel()
@@ -93,24 +95,30 @@ namespace ProjektGenspil
             string filePath = "Forespørgsler.txt";
             if (!File.Exists(filePath))
             {
-                Console.WriteLine($"Filen blev ikke fundet: {filePath}");
-                return;
+                GemForespørgsel();
             }
-            using (StreamReader sr = new StreamReader("Forespørgsler.txt"))
+            using (StreamReader srf = new StreamReader(filePath))
+            {
                 while (true)
                 {
-                    string line = sr.ReadLine();
+                    string line = srf.ReadLine();
 
-                    if(line == null || line == "")
+                    if (line == null)
                     {
                         break;
                     }
 
+                    if (line == "")
+                    {
+                        continue; // Fortsætter loopet, når der er en linje uden tekst.
+                    }
+
                     Forespørgsel forespørgsels = Forespørgsel.FromString(line);
-                    forespørgsel.Add(forespørgsels); 
+                    forespørgsel.Add(forespørgsels);
                 }
+            }
         }
-        
+
         public static void SeListe()
         {
             // Udskriv liste med forespørgsler
@@ -133,7 +141,7 @@ namespace ProjektGenspil
 
         }
 
-        static void SletForespørgsel()
+        public static void SletForespørgsel()
         {
             //Indsæt slet forespørgsel
             Console.WriteLine("Indtast nummeret på den forespørgsel du ønsker at slette");
