@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -48,7 +49,7 @@ namespace ProjektGenspil
 
                 for (int j = 0; j < Lager.Genrer.Count(); j++)
                 {
-                    Console.WriteLine($"{j} - {Lager.Genrer[j].Navn}\n");
+                    Console.WriteLine($"{j + 1} - {Lager.Genrer[j].Navn}\n");
                 }
                 int nummer = int.Parse(Console.ReadLine());
                 Genre genre = Lager.Genrer.ElementAtOrDefault(nummer) ?? Lager.Genrer[0]; // ændret flow control til at være mere readable
@@ -95,21 +96,18 @@ namespace ProjektGenspil
             }
             else
             {
-                foreach (Brætspil brætspil in Lager.BrætspilsListe)
+                for (int i = 0; i < Lager.BrætspilsListe.Count; i++)
                 {
-                    //Console.WriteLine(brætspil.Navn);
-                    //Console.WriteLine(brætspil.Stand);
-                    Console.WriteLine(brætspil.ToString());
+                    var brætspil = Lager.BrætspilsListe[i];
+                    Console.WriteLine($"[{i + 1}] {brætspil.ToString()}");
                 }
             }
         }
 
+
         public static void DeleteBoardGame() 
         {
-            //mangler en funktion der fjerner spil fra .txt filen. Måske kan man kun overskrive filen uden den man vil slette.
-            //problemet er at man kan slette fra listen i koden, men funktionen til at fjerne spillet fra txt findes ikke.
-            //Dette gør at hver gang man ser listen af spil, er spillene ikke blevet fjernet. 
-
+           
             Console.Clear();
             Console.WriteLine("Liste over brætspil:");
 

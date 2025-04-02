@@ -8,7 +8,6 @@ namespace ProjektGenspil
         static void Main()
         {
             Lager.LoadBoardGames();
-            ForespørgselMenuer.gemForespørgsel();
             ForespørgselMenuer.LoadForespørgsel();
             
             while (true)

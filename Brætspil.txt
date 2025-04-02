@@ -1,0 +1,6 @@
+Ludo | A | 2 | 4 | 1 | 150 | Familiespil
+Kalaha | B | 2 | 2 | 1 | 85 | Familiespil
+Backgammon | B | 2 | 2 | 1 | 225 | Voksenspil
+7 Wonders: Architects - Medals | B | 2 | 7 | 1 | 99,95 | Selskabspil
+7 Wonders: Duel Agora - Engelsk | E | 2 | 2 | 1 | 25 | Familiespil
+Kalaha | C | 2 | 2 | 1 | 50 | Familiespil

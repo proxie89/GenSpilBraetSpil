@@ -29,10 +29,6 @@ namespace ProjektGenspil
         // SaveBoardGames og LoadBoardGames kunne lægges i en Lager-klasse sammen med brætspilListe.
         public static void SaveBoardGames()
         {
-            /* LoadBoardGames er sat ind for at undgå, at linjen i filen overskrives med det nye brætspil. 
-             * Dog sker der det, at hvis man tilføjer et brætspil mere, så kommer der dobbelt antal
-             * fordi den loader igen. Ved ikke, hvilken løsning man hellere skal vælge?
-             */
             using (StreamWriter sw = new StreamWriter("Brætspil.txt"))
             {
                 foreach (Brætspil brætspil in BrætspilsListe)
@@ -44,6 +40,12 @@ namespace ProjektGenspil
 
         public static void LoadBoardGames()
         {
+            string filePath = "Brætspil.txt";
+            if (!File.Exists(filePath))
+            {
+                SaveBoardGames();
+            }
+
             using (StreamReader sr = new StreamReader("Brætspil.txt"))  // Her åbnes tekstfilen Brætspil.txt i den lokale mappe på computeren.
             {
                 while (true)
