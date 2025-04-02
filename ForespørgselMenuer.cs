@@ -79,7 +79,7 @@ namespace ProjektGenspil
         }
 
         
-        static void gemForespørgsel()
+        public static void gemForespørgsel()
         {
            using(StreamWriter sw = new StreamWriter("Forespørgsler.txt"))
                 foreach (Forespørgsel forespørgsel in forespørgsel)
