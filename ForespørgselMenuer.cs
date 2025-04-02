@@ -76,6 +76,8 @@ namespace ProjektGenspil
                 Console.WriteLine($"Forespørgsel {_id} blev oprettet.\nSpil: {_brætspil}\nNavn: {_kundenavn}\nTlf: {_tlf}\n");
 
             }
+
+            GemForespørgsel();
         }
 
         
