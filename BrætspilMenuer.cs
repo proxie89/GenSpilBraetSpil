@@ -30,8 +30,14 @@ namespace ProjektGenspil
                                 
                 Stand stand = GetNiveauForStand(niveau) ?? Lager.Tilstande[0]; // ændret flow control til at være mere readable
 
-                Console.Write("Indtast antal spillere for dette spil: ");
-                string antalSpillere = Console.ReadLine();
+                Console.Write("Indtast mindste antal spillere for dette spil: ");
+                //string antalSpillere = Console.ReadLine();
+                int minAntalSpillere = int.Parse(Console.ReadLine());
+
+                Console.Write("Indtast højeste antal spillere for dette spil: ");
+                //string antalSpillere = Console.ReadLine();
+                int maxAntalSpillere = int.Parse(Console.ReadLine());
+
                 int antalPåLager = 1;
 
                 Console.Write("Sæt prisen på brætspillet (vurderes ud fra spillets tilstand): ");
@@ -46,7 +52,7 @@ namespace ProjektGenspil
                 int nummer = int.Parse(Console.ReadLine());
                 Genre genre = Lager.Genrer.ElementAtOrDefault(nummer) ?? Lager.Genrer[0]; // ændret flow control til at være mere readable
 
-                Brætspil spil = new Brætspil(navn, stand, antalSpillere, antalPåLager, pris, genre);
+                Brætspil spil = new Brætspil(navn, stand, minAntalSpillere, maxAntalSpillere, antalPåLager, pris, genre);
                 Lager.BrætspilsListe.Add(spil);
                 Console.WriteLine($"\"{spil.Navn}\" er tilføjet til listen og gemt.");
             }
