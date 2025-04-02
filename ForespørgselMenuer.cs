@@ -9,7 +9,7 @@ namespace ProjektGenspil
     internal class ForespørgselMenuer
     {
         static List<Forespørgsel> forespørgsel = new List<Forespørgsel>(); //Til forespørgsler
-
+        Forespørgsel.LoadForespørgsel();
         public static void ForespørgselMenu()
         {
             while (true)
@@ -78,10 +78,9 @@ namespace ProjektGenspil
             }
         }
 
-        
         public static void gemForespørgsel()
         {
-           using(StreamWriter sw = new StreamWriter("Forespørgsler.txt"))
+            using (StreamWriter sw = new StreamWriter("Forespørgsler.txt"))
                 foreach (Forespørgsel forespørgsel in forespørgsel)
                 {
                     sw.WriteLine(forespørgsel.ToString());
@@ -90,27 +89,28 @@ namespace ProjektGenspil
 
         public static void LoadForespørgsel()
         {
-            string filePath = "Forespørgsler.txt";
-            if (!File.Exists(filePath))
+            using (StreamReader sr = new StreamReader("Forespørgsler.txt"))
             {
-                Console.WriteLine($"Filen blev ikke fundet: {filePath}");
-                return;
-            }
-            using (StreamReader sr = new StreamReader(filePath))
+
                 while (true)
                 {
                     string line = sr.ReadLine();
 
-                    if(line == null || line == "")
+                    if (line == null || line == "")
                     {
                         break;
                     }
+                    if (line == "")
+                    {
+                        continue;
+                    }
 
                     Forespørgsel forespørgsels = Forespørgsel.FromString(line);
-                    forespørgsel.Add(forespørgsels); 
+                    forespørgsel.Add(forespørgsels);
                 }
+            }
         }
-        
+
         public static void SeListe()
         {
             // Udskriv liste med forespørgsler

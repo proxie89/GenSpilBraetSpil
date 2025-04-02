@@ -42,5 +42,7 @@ namespace ProjektGenspil
             Forespørgsel forespørgsels = new Forespørgsel(_id, _kundenavn, _tlf, _brætspil);
             return forespørgsels;
         }
+
     }
+
 }
