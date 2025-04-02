@@ -96,7 +96,7 @@ namespace ProjektGenspil
                 Console.WriteLine($"Filen blev ikke fundet: {filePath}");
                 return;
             }
-            using (StreamReader sr = new StreamReader(filePath))
+            using (StreamReader sr = new StreamReader("Forespørgsler.txt"))
                 while (true)
                 {
                     string line = sr.ReadLine();
