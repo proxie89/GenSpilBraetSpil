@@ -8,6 +8,7 @@ namespace ProjektGenspil
         static void Main()
         {
             Lager.LoadBoardGames();
+            ForespørgselMenuer.LoadForespørgsel();
             while (true)
             {
                 Console.Clear(); // Rydder skærmen for en ren menuvisning
