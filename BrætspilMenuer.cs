@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -95,14 +96,14 @@ namespace ProjektGenspil
             }
             else
             {
-                foreach (Brætspil brætspil in Lager.BrætspilsListe)
+                for (int i = 0; i < Lager.BrætspilsListe.Count; i++)
                 {
-                    //Console.WriteLine(brætspil.Navn);
-                    //Console.WriteLine(brætspil.Stand);
-                    Console.WriteLine(brætspil.ToString());
+                    var brætspil = Lager.BrætspilsListe[i];
+                    Console.WriteLine($"[{i + 1}] {brætspil.ToString()}");
                 }
             }
         }
+
 
         public static void DeleteBoardGame() 
         {
