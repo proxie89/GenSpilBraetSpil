@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -137,7 +138,16 @@ namespace ProjektGenspil
                     int zeroBasedIndex = index - 1; 
                     string deletedName = Lager.BrætspilsListe[zeroBasedIndex].Navn;
                     Lager.BrætspilsListe.RemoveAt(zeroBasedIndex);
-                    Console.WriteLine($"\"{deletedName}\" er slettet fra listen.");
+
+                    using (StreamWriter swSlet = new StreamWriter("Brætspil.txt", false))
+
+                        foreach (var game in Lager.BrætspilsListe)
+                        {
+                            swSlet.WriteLine(game.ToString());
+                        }
+                    
+
+                        Console.WriteLine($"\"{deletedName}\" er slettet fra listen.");
                 }
                 else
                 {
