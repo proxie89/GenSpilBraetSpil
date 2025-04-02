@@ -30,7 +30,6 @@ namespace ProjektGenspil
         {
             _navn = navn;
             _stand = stand;
-            //_antalSpillere = antalSpillere;
             _minAntalSpillere = minAntalSpillere;
             _maxAntalSpillere = maxAntalSpillere;
             _antalPåLager = antalPåLager;
@@ -45,7 +44,9 @@ namespace ProjektGenspil
 
         public override string ToString()
         {
-            return Navn.PadRight(40) + " | " + Stand.Niveau + " | " + MinAntalSpillere + " | " + MaxAntalSpillere + " | " + AntalPåLager + " | " + Pris.ToString().PadRight(10) + " | " + Genre.Navn;
+
+            return  Navn.PadRight(40) + " | " + Stand.Niveau + " | " + MinAntalSpillere + " | " + MaxAntalSpillere + " | " + AntalPåLager + " | " + Pris.ToString().PadRight(7) + " | " + Genre.Navn;
+
         }
 
         public static Brætspil FromString(string line)
@@ -54,7 +55,6 @@ namespace ProjektGenspil
 
             string navn = lineParts[0];
             Stand stand = BrætspilMenuer.GetNiveauForStand(char.Parse(lineParts[1]));
-            //string antalSpillere = lineParts[2];
             int minAntalSpillere = int.Parse(lineParts[2]);
             int maxAntalSpillere = int.Parse(lineParts[3]);
             int antalPåLager = int.Parse(lineParts[4]);

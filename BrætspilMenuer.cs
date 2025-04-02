@@ -88,8 +88,17 @@ namespace ProjektGenspil
 
         public static void PrintList()
         {
+            string indexPrintList = "".PadRight(3);
+            string titelPrintList = "Navn".PadRight(41);
+            string standPrintList = "Stand".PadRight(18);
+            //string antalSpillerePrintList = "# spillere";
+            //string antalPåLagerPrintList = "Antal på lager";
+            string prisPrintList = "Pris".PadRight(10);
+            string genrePrintList = "Genre".PadRight(20);
+
             Console.Clear();
-            Console.WriteLine("=== Liste over navne ===\n");
+            Console.Write("=== Liste over navne ===\n");
+            Console.WriteLine($"{indexPrintList}{titelPrintList}{standPrintList}{prisPrintList}{genrePrintList}");
             if (Lager.BrætspilsListe.Count == 0)
             {
                 Console.WriteLine("Ingen navne tilføjet endnu.");
