@@ -52,7 +52,7 @@ namespace ProjektGenspil
                     Console.WriteLine($"{j + 1} - {Lager.Genrer[j].Navn}\n");
                 }
                 int nummer = int.Parse(Console.ReadLine());
-                Genre genre = Lager.Genrer.ElementAtOrDefault(nummer) ?? Lager.Genrer[0]; // ændret flow control til at være mere readable
+                Genre genre = Lager.Genrer.ElementAtOrDefault(nummer - 1) ?? Lager.Genrer[0]; // ændret flow control til at være mere readable
 
                 Brætspil spil = new Brætspil(navn, stand, minAntalSpillere, maxAntalSpillere, antalPåLager, pris, genre);
                 Lager.BrætspilsListe.Add(spil);
@@ -129,6 +129,7 @@ namespace ProjektGenspil
             Console.Clear();
             Console.WriteLine("=== Liste over brætspil ===");
             Console.WriteLine($"{indexPrintList}{titelPrintList}{standPrintList}{antalSpillerePrintList1}{antalSpillerePrintList2}{antalPåLagerPrintList}{prisPrintList}{genrePrintList}");
+
 
             if (Lager.BrætspilsListe.Count == 0)
             {
