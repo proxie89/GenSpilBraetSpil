@@ -1,1 +1,2 @@
 1 | Andersine And | 11223344 | Tegn & Gæt
+2 | David | 66 | Vildkatten

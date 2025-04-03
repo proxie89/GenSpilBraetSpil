@@ -20,7 +20,7 @@ namespace ProjektGenspil
                 Console.WriteLine("2. Se liste med forespørgsler\n");
                 Console.WriteLine("3. Slet forespørgsel\n");
                 Console.WriteLine("4. Søg på forespørgsel\n");
-                Console.WriteLine("5. Afslut programmet!\n");
+                Console.WriteLine("5. Tilbage til hovedmenu!\n");
                 Console.Write("Vælg en mulighed: ");
 
                 string input = Console.ReadLine();
