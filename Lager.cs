@@ -8,8 +8,12 @@ namespace ProjektGenspil
 {
     public class Lager
     {
+        public string FilePathBrætspil { get; set; } = "Brætspil.txt";// Sti til filen, der gemmer data
+
+
+
         //static List<string> names = new List<string>(); // Liste til at gemme navne
-        public static List<Brætspil> BrætspilsListe = new List<Brætspil>();
+        public List<Brætspil> BrætspilsListe = new List<Brætspil>();
         public static List<Stand> Tilstande =
             [
                 new Stand('A', "Super stand - Næsten som nyt."),
@@ -26,10 +30,14 @@ namespace ProjektGenspil
                 new Genre("Voksenspil"),
             ];
 
-        // SaveBoardGames og LoadBoardGames kunne lægges i en Lager-klasse sammen med brætspilListe.
-        public static void SaveBoardGames()
+        public Lager(string filePathBrætspil)   // Konstruktør placeres typisk mellem felterne ovenover og metoder nedenunder.
         {
-            using (StreamWriter sw = new StreamWriter("Brætspil.txt"))
+            FilePathBrætspil = filePathBrætspil; // Sætter filstien ved oprettelse af DataHandler
+        }
+        
+        public void SaveBoardGames()
+        {
+            using (StreamWriter sw = new StreamWriter(FilePathBrætspil))  // FilePathBrætspil er ikke static, så den hører til et objekt.
             {
                 foreach (Brætspil brætspil in BrætspilsListe)
                 {
@@ -38,15 +46,14 @@ namespace ProjektGenspil
             }
         }
 
-        public static void LoadBoardGames()
+        public void LoadBoardGames()
         {
-            string filePath = "Brætspil.txt";
-            if (!File.Exists(filePath))
+            if (!File.Exists(FilePathBrætspil))
             {
                 SaveBoardGames();
             }
 
-            using (StreamReader sr = new StreamReader("Brætspil.txt"))  // Her åbnes tekstfilen Brætspil.txt i den lokale mappe på computeren.
+            using (StreamReader sr = new StreamReader(FilePathBrætspil))  // Her åbnes tekstfilen Brætspil.txt i den lokale mappe på computeren.
             {
                 while (true)
                 {

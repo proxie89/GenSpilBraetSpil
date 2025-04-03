@@ -8,7 +8,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Update="C:\Users\proxi\source\repos\proxie89\GenSpilBraetSpil\Brætspil.txt" CopyToOutputDirectory="Always" />
+		<None Update="Brætspil.txt" CopyToOutputDirectory="Always" />
 		<None Update="Forespørgsler.txt" CopyToOutputDirectory="Always" />
 	</ItemGroup>
 
