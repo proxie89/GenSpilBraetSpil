@@ -139,7 +139,7 @@ namespace ProjektGenspil
                 foreach (var forespørgsels in forespørgsel)
                 {
                     Console.WriteLine($"ID: {forespørgsels.Id} \nNavn: {forespørgsels.Kundenavn} \nTlf: {forespørgsels.Tlf}" +
-                        $"\nBrætspil: {forespørgsels.Brætspil}");
+                        $"\nBrætspil: {forespørgsels.Brætspil}  \n-------------------------------");
 
                 }
             }

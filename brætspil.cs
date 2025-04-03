@@ -45,7 +45,7 @@ namespace ProjektGenspil
         public override string ToString()
         {
 
-            return  Navn.PadRight(40) + " | " + Stand.Niveau + " | " + MinAntalSpillere + " | " + MaxAntalSpillere + " | " + AntalPåLager + " | " + Pris.ToString().PadRight(7) + " | " + Genre.Navn;
+            return  Navn.PadRight(40) + " |   " + Stand.Niveau + "   |   " + MinAntalSpillere + " - " + MaxAntalSpillere + "   |   " + AntalPåLager + "   |   " + Pris.ToString().PadRight(7) + " | " + Genre.Navn;
 
         }
 

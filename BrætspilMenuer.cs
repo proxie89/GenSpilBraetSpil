@@ -88,17 +88,18 @@ namespace ProjektGenspil
 
         public static void PrintList()
         {
-            string indexPrintList = "".PadRight(3);
-            string titelPrintList = "Navn".PadRight(41);
-            string standPrintList = "Stand".PadRight(18);
-            //string antalSpillerePrintList = "# spillere";
-            //string antalPåLagerPrintList = "Antal på lager";
-            string prisPrintList = "Pris".PadRight(10);
+            string indexPrintList = "".PadRight(4);
+            string titelPrintList = "Navn".PadRight(43);
+            string standPrintList = "Stand".PadRight(8);
+            string antalSpillerePrintList1 = "#".PadRight(2);
+            string antalSpillerePrintList2 = "Spillere".PadRight(10); 
+            string antalPåLagerPrintList = "Lager".PadRight(9);
+            string prisPrintList = "Pris".PadRight(13);
             string genrePrintList = "Genre".PadRight(20);
 
             Console.Clear();
             Console.Write("=== Liste over navne ===\n");
-            Console.WriteLine($"{indexPrintList}{titelPrintList}{standPrintList}{prisPrintList}{genrePrintList}");
+            Console.WriteLine($"{indexPrintList}{titelPrintList}{standPrintList}{antalSpillerePrintList1}{antalSpillerePrintList2}{antalPåLagerPrintList}{prisPrintList}{genrePrintList}");
             if (Lager.BrætspilsListe.Count == 0)
             {
                 Console.WriteLine("Ingen navne tilføjet endnu.");
@@ -116,9 +117,18 @@ namespace ProjektGenspil
 
         public static void DeleteBoardGame() 
         {
-           
+            string indexPrintList = "".PadRight(4);
+            string titelPrintList = "Navn".PadRight(43);
+            string standPrintList = "Stand".PadRight(8);
+            string antalSpillerePrintList1 = "#".PadRight(2);
+            string antalSpillerePrintList2 = "Spillere".PadRight(10);
+            string antalPåLagerPrintList = "Lager".PadRight(9);
+            string prisPrintList = "Pris".PadRight(13);
+            string genrePrintList = "Genre".PadRight(20);
+
             Console.Clear();
-            Console.WriteLine("Liste over brætspil:");
+            Console.WriteLine("=== Liste over brætspil ===");
+            Console.WriteLine($"{indexPrintList}{titelPrintList}{standPrintList}{antalSpillerePrintList1}{antalSpillerePrintList2}{antalPåLagerPrintList}{prisPrintList}{genrePrintList}");
 
             if (Lager.BrætspilsListe.Count == 0)
             {
