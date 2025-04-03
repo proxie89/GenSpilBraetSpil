@@ -8,8 +8,8 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Update="Brætspil.txt" CopyToOutputDirectory="PreserveNewest" />
-		<None Update="Forespørgsler.txt" CopyToOutputDirectory="PreserveNewest" />
+		<None Update="Brætspil.txt" CopyToOutputDirectory="Always" />
+		<None Update="Forespørgsler.txt" CopyToOutputDirectory="Always" />
 	</ItemGroup>
 
 </Project>
