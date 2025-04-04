@@ -19,13 +19,7 @@ namespace ProjektGenspil
                 new Stand('D', "Ringe stand - Meget slidt."),
                 new Stand('E', "Mangelfuldt - Mangler dele. Kan bruges til reservedele."),
             ];
-        public static List<Genre> Genrer =
-           [
-                new Genre("Familiespil"),
-                new Genre("Selskabspil"),
-                new Genre("Strategispil"),
-                new Genre("Voksenspil"),
-            ];
+        
 
         public Lager(string filePathBrætspil)   // Konstruktør placeres typisk mellem felterne ovenover og metoder nedenunder.
         {

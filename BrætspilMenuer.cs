@@ -44,13 +44,13 @@ namespace ProjektGenspil
                 decimal pris = decimal.Parse(Console.ReadLine());
 
                 Console.WriteLine("Indtast hvilken genre brætspillet hører til. Vælg det som det som passer bedst:\n");
-
-                for (int j = 0; j < Lager.Genrer.Count(); j++)
+                Genre[] genrer = Enum.GetValues<Genre>();
+                for (int j = 0; j < genrer.Length; j++)
                 {
-                    Console.WriteLine($"{j + 1} - {Lager.Genrer[j].Navn}\n");
+                    Console.WriteLine($"{j + 1} - {genrer[j]}\n");
                 }
                 int nummer = int.Parse(Console.ReadLine());
-                Genre genre = Lager.Genrer.ElementAtOrDefault(nummer - 1) ?? Lager.Genrer[0]; 
+                Genre genre = genrer.ElementAtOrDefault(nummer - 1); 
 
                 Brætspil spil = new Brætspil(navn, stand, minAntalSpillere, maxAntalSpillere, antalPåLager, pris, genre);
                 lager.BrætspilsListe.Add(spil);
@@ -72,16 +72,9 @@ namespace ProjektGenspil
             return null;
         }
 
-        public static Genre GetNavnForGenre(string navn)
+        public static Genre ParseGenre(string navn)
         {
-            for (int i = 0; i < Lager.Genrer.Count(); i++)
-            {
-                if (Lager.Genrer[i].Navn == navn)
-                {
-                    return Lager.Genrer[i];
-                }
-            }
-            return null;
+            return Enum.Parse<Genre>(navn);
         }
 
         public static void PrintList(Lager lager)
@@ -108,7 +101,7 @@ namespace ProjektGenspil
                 for (int i = 0; i < lager.BrætspilsListe.Count; i++)
                 {
                     var brætspil = lager.BrætspilsListe[i];
-                    Console.WriteLine($"[{i + 1}] {brætspil.ToString()}");
+                    Console.WriteLine($"[{i + 1}] {brætspil.ToPrettyString()}");
                 }
             }
         }
@@ -140,7 +133,7 @@ namespace ProjektGenspil
             for (int i = 0; i < lager.BrætspilsListe.Count; i++)
             {
                 var game = lager.BrætspilsListe[i];
-                Console.WriteLine($"[{i + 1}] {game.ToString()}");
+                Console.WriteLine($"[{i + 1}] {game.ToPrettyString()}");
             }
 
             Console.WriteLine("\nIndtast indeksnummeret på det brætspil, du vil slette: ");

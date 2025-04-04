@@ -6,16 +6,29 @@ using System.Threading.Tasks;
 
 namespace ProjektGenspil
 {
-    public class Genre
+    public enum Genre
     {
-        
-        private string _navn;
-
-        public string Navn { get { return _navn; } set { _navn = value; } }
-
-        public Genre(string navn)
-        {
-            _navn = navn;
-        }
+        Familiespil,
+        Selskabsspil,
+        Strategispil,
+        Voksenspil,
+        Børnespil
     }
+
+    //private string _navn;
+
+    //public string Navn { get { return _navn; } set { _navn = value; } }
+
+    //public Genre(string navn)
+    //{
+    //    _navn = navn;
+    //}
+
+    //public static List<Genre> Genrer =
+    //       [
+    //            new Genre("Familiespil"),
+    //            new Genre("Selskabspil"),
+    //            new Genre("Strategispil"),
+    //            new Genre("Voksenspil"),
+    //        ];
 }
