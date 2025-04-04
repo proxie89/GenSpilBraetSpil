@@ -11,7 +11,6 @@ namespace ProjektGenspil
     {
         private string _navn;
         private Stand _stand;
-        //private string _antalSpillere;  // Ændret fra int til string, fordi man nogle gange skriver f.eks.: 2-6 spillere. Så dækker den bredere.
         private int _minAntalSpillere;
         private int _maxAntalSpillere;
         private int _antalPåLager;  // Antal hører måske ikke til her, fordi det vedrører flere brætspil? Jeg sætter den foreløbig til 1.
@@ -36,12 +35,7 @@ namespace ProjektGenspil
             _pris = pris;
             _genre = genre;
         }
-
-        /* Vi vil have en funktion ToString. 
-         * Den skal kunne tilgås udefra, så public.
-         * Man skal bruge override, fordi man skal overskrive den indbyggede funktion.
-         */
-
+                
         public override string ToString()
         {
 

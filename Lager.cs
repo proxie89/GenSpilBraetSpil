@@ -10,9 +10,6 @@ namespace ProjektGenspil
     {
         public string FilePathBrætspil { get; set; } = "Brætspil.txt";// Sti til filen, der gemmer data
 
-
-
-        //static List<string> names = new List<string>(); // Liste til at gemme navne
         public List<Brætspil> BrætspilsListe = new List<Brætspil>();
         public static List<Stand> Tilstande =
             [

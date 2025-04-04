@@ -30,14 +30,12 @@ namespace ProjektGenspil
                 }
                 char niveau = char.Parse(Console.ReadLine().ToUpper());
                                 
-                Stand stand = GetNiveauForStand(niveau) ?? Lager.Tilstande[0]; // ændret flow control til at være mere readable
+                Stand stand = GetNiveauForStand(niveau) ?? Lager.Tilstande[0]; 
 
                 Console.Write("Indtast mindste antal spillere for dette spil: ");
-                //string antalSpillere = Console.ReadLine();
                 int minAntalSpillere = int.Parse(Console.ReadLine());
 
                 Console.Write("Indtast højeste antal spillere for dette spil: ");
-                //string antalSpillere = Console.ReadLine();
                 int maxAntalSpillere = int.Parse(Console.ReadLine());
 
                 int antalPåLager = 1;
@@ -52,7 +50,7 @@ namespace ProjektGenspil
                     Console.WriteLine($"{j + 1} - {Lager.Genrer[j].Navn}\n");
                 }
                 int nummer = int.Parse(Console.ReadLine());
-                Genre genre = Lager.Genrer.ElementAtOrDefault(nummer - 1) ?? Lager.Genrer[0]; // ændret flow control til at være mere readable
+                Genre genre = Lager.Genrer.ElementAtOrDefault(nummer - 1) ?? Lager.Genrer[0]; 
 
                 Brætspil spil = new Brætspil(navn, stand, minAntalSpillere, maxAntalSpillere, antalPåLager, pris, genre);
                 lager.BrætspilsListe.Add(spil);
@@ -100,6 +98,7 @@ namespace ProjektGenspil
             Console.Clear();
             Console.Write("=== Liste over navne ===\n");
             Console.WriteLine($"{indexPrintList}{titelPrintList}{standPrintList}{antalSpillerePrintList1}{antalSpillerePrintList2}{antalPåLagerPrintList}{prisPrintList}{genrePrintList}");
+            
             if (lager.BrætspilsListe.Count == 0)
             {
                 Console.WriteLine("Ingen navne tilføjet endnu.");
@@ -146,35 +145,51 @@ namespace ProjektGenspil
 
             Console.WriteLine("\nIndtast indeksnummeret på det brætspil, du vil slette: ");
             string input = Console.ReadLine();
+           
+            int index = int.Parse(input);
+            int zeroBasedIndex = index - 1;
+            string deletedName = lager.BrætspilsListe[zeroBasedIndex].Navn;
 
-            try
-            {
-                int index = int.Parse(input); 
-                if (index >= 1 && index <= lager.BrætspilsListe.Count) 
+            Console.WriteLine($"Er du sikker på du vil slette {deletedName}? Skriv ja eller nej:");
+            string confirmInput = Console.ReadLine().ToUpper();
+
+            if (confirmInput == "JA")
+
+                try
                 {
-                    int zeroBasedIndex = index - 1; 
-                    string deletedName = lager.BrætspilsListe[zeroBasedIndex].Navn;
-                    lager.BrætspilsListe.RemoveAt(zeroBasedIndex);
-
-                    using (StreamWriter swSlet = new StreamWriter("Brætspil.txt", false))
-
-                        foreach (var game in lager.BrætspilsListe)
-                        {
-                            swSlet.WriteLine(game.ToString());
-                        }
+                
+                    if (index >= 1 && index <= lager.BrætspilsListe.Count) 
+                    {
                     
+                        lager.BrætspilsListe.RemoveAt(zeroBasedIndex);
+                        {
 
-                        Console.WriteLine($"\"{deletedName}\" er slettet fra listen.");
+                        using (StreamWriter swSlet = new StreamWriter("Brætspil.txt", false))
+
+                            foreach (var game in lager.BrætspilsListe)
+                            {
+                                swSlet.WriteLine(game.ToString());
+                            }
+
+                            Console.WriteLine($"\"{deletedName}\" er slettet fra listen.");
+                        }
+
+                   
+                        }
+                    else
+                        {
+                        Console.WriteLine("Ugyldigt indeksnummer! Indtast et nummer mellem 1 og " + lager.BrætspilsListe.Count + ".");
+                        }
                 }
-                else
-                {
-                    Console.WriteLine("Ugyldigt indeksnummer! Indtast et nummer mellem 1 og " + lager.BrætspilsListe.Count + ".");
-                }
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Fejl: Du skal indtaste et heltal (f.eks. 1, 2, 3).");
-            } 
+                catch (FormatException)
+                    {
+                        Console.WriteLine("Fejl: Du skal indtaste et heltal (f.eks. 1, 2, 3).");
+                    }
+                        
+             else
+             {
+                Console.WriteLine($"Du valgte Nej til at slette. {deletedName} blev ikke slettet!");
+             }
         }
     }
 }
