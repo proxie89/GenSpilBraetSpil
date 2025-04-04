@@ -7,7 +7,9 @@ namespace ProjektGenspil
     {
         static void Main()
         {
-            Lager.LoadBoardGames();
+            Lager lager = new Lager("Brætspil.txt");  // Dette er et lagerobjekt.
+            lager.LoadBoardGames();
+           
             ForespørgselMenuer.LoadForespørgsel();
             
             while (true)
@@ -27,15 +29,15 @@ namespace ProjektGenspil
                 {
                     case "1":
                         Console.WriteLine("\nTilføj brætspil");
-                        BrætspilMenuer.AddBoardGame();
+                        BrætspilMenuer.AddBoardGame(lager);
                         break;
                     case "2":
                         Console.WriteLine("\nVis liste af brætspil");
-                        BrætspilMenuer.PrintList();
+                        BrætspilMenuer.PrintList(lager);
                         break;
                     case "3":
                         Console.WriteLine("\nSlet brætspil");
-                        BrætspilMenuer.DeleteBoardGame();
+                        BrætspilMenuer.DeleteBoardGame(lager);
                         break;
                     case "4":
                         Console.WriteLine("\nForespørgsel menuer.");

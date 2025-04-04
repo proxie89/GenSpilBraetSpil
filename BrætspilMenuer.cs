@@ -11,7 +11,7 @@ namespace ProjektGenspil
     internal class BrætspilMenuer
     {
        
-        public static void AddBoardGame()
+        public static void AddBoardGame(Lager lager)
         {
             Console.Clear();
 
@@ -55,11 +55,11 @@ namespace ProjektGenspil
                 Genre genre = Lager.Genrer.ElementAtOrDefault(nummer - 1) ?? Lager.Genrer[0]; // ændret flow control til at være mere readable
 
                 Brætspil spil = new Brætspil(navn, stand, minAntalSpillere, maxAntalSpillere, antalPåLager, pris, genre);
-                Lager.BrætspilsListe.Add(spil);
+                lager.BrætspilsListe.Add(spil);
                 Console.WriteLine($"\"{spil.Navn}\" er tilføjet til listen og gemt.");
             }
 
-            Lager.SaveBoardGames();
+            lager.SaveBoardGames();
         }
 
         public static Stand GetNiveauForStand(char niveau)
@@ -86,7 +86,7 @@ namespace ProjektGenspil
             return null;
         }
 
-        public static void PrintList()
+        public static void PrintList(Lager lager)
         {
             string indexPrintList = "".PadRight(4);
             string titelPrintList = "Navn".PadRight(43);
@@ -100,22 +100,21 @@ namespace ProjektGenspil
             Console.Clear();
             Console.Write("=== Liste over navne ===\n");
             Console.WriteLine($"{indexPrintList}{titelPrintList}{standPrintList}{antalSpillerePrintList1}{antalSpillerePrintList2}{antalPåLagerPrintList}{prisPrintList}{genrePrintList}");
-            if (Lager.BrætspilsListe.Count == 0)
+            if (lager.BrætspilsListe.Count == 0)
             {
                 Console.WriteLine("Ingen navne tilføjet endnu.");
             }
             else
             {
-                for (int i = 0; i < Lager.BrætspilsListe.Count; i++)
+                for (int i = 0; i < lager.BrætspilsListe.Count; i++)
                 {
-                    var brætspil = Lager.BrætspilsListe[i];
+                    var brætspil = lager.BrætspilsListe[i];
                     Console.WriteLine($"[{i + 1}] {brætspil.ToString()}");
                 }
             }
         }
 
-
-        public static void DeleteBoardGame() 
+        public static void DeleteBoardGame(Lager lager) 
         {
             string indexPrintList = "".PadRight(4);
             string titelPrintList = "Navn".PadRight(43);
@@ -131,7 +130,7 @@ namespace ProjektGenspil
             Console.WriteLine($"{indexPrintList}{titelPrintList}{standPrintList}{antalSpillerePrintList1}{antalSpillerePrintList2}{antalPåLagerPrintList}{prisPrintList}{genrePrintList}");
 
 
-            if (Lager.BrætspilsListe.Count == 0)
+            if (lager.BrætspilsListe.Count == 0)
             {
                 Console.WriteLine("Ingen brætspil i listen!");
                 Console.WriteLine("Tryk på en tast for at fortsætte...");
@@ -139,9 +138,9 @@ namespace ProjektGenspil
                 return;
             }
 
-            for (int i = 0; i < Lager.BrætspilsListe.Count; i++)
+            for (int i = 0; i < lager.BrætspilsListe.Count; i++)
             {
-                var game = Lager.BrætspilsListe[i];
+                var game = lager.BrætspilsListe[i];
                 Console.WriteLine($"[{i + 1}] {game.ToString()}");
             }
 
@@ -151,15 +150,15 @@ namespace ProjektGenspil
             try
             {
                 int index = int.Parse(input); 
-                if (index >= 1 && index <= Lager.BrætspilsListe.Count) 
+                if (index >= 1 && index <= lager.BrætspilsListe.Count) 
                 {
                     int zeroBasedIndex = index - 1; 
-                    string deletedName = Lager.BrætspilsListe[zeroBasedIndex].Navn;
-                    Lager.BrætspilsListe.RemoveAt(zeroBasedIndex);
+                    string deletedName = lager.BrætspilsListe[zeroBasedIndex].Navn;
+                    lager.BrætspilsListe.RemoveAt(zeroBasedIndex);
 
                     using (StreamWriter swSlet = new StreamWriter("Brætspil.txt", false))
 
-                        foreach (var game in Lager.BrætspilsListe)
+                        foreach (var game in lager.BrætspilsListe)
                         {
                             swSlet.WriteLine(game.ToString());
                         }
@@ -169,7 +168,7 @@ namespace ProjektGenspil
                 }
                 else
                 {
-                    Console.WriteLine("Ugyldigt indeksnummer! Indtast et nummer mellem 1 og " + Lager.BrætspilsListe.Count + ".");
+                    Console.WriteLine("Ugyldigt indeksnummer! Indtast et nummer mellem 1 og " + lager.BrætspilsListe.Count + ".");
                 }
             }
             catch (FormatException)
