@@ -6,3 +6,4 @@ Backgammon|B|2|2|1|225|Voksenspil
 Kalaha|C|2|2|1|50|Familiespil
 Kalaha|B|2|2|1|75|Familiespil
 Catan|B|3|4|1|150|Strategispil
+Sequence|B|2|12|1|175|Strategispil

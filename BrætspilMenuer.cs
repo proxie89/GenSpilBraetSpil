@@ -23,14 +23,14 @@ namespace ProjektGenspil
                 string navn = Console.ReadLine();
 
                 Console.WriteLine("Indtast hvilken stand brætspillet er i. Vælg et af følgende bogstaver:\n");
-
-                for (int j = 0; j < Lager.Tilstande.Count(); j++)
+                Stand[] tilstande = Enum.GetValues<Stand>();
+                for (int j = 0; j < tilstande.Length; j++)   // length er en property og kan bruges til array (count er en metode)
                 {
-                    Console.WriteLine($"{Lager.Tilstande[j].Niveau} - {Lager.Tilstande[j].Beskrivelse}\n");
+                    Console.WriteLine($"{(char)tilstande[j]} - {tilstande[j]}\n");
                 }
                 char niveau = char.Parse(Console.ReadLine().ToUpper());
-                                
-                Stand stand = GetNiveauForStand(niveau) ?? Lager.Tilstande[0]; 
+
+                Stand stand = ParseStand(niveau);
 
                 Console.Write("Indtast mindste antal spillere for dette spil: ");
                 int minAntalSpillere = int.Parse(Console.ReadLine());
@@ -60,16 +60,11 @@ namespace ProjektGenspil
             lager.SaveBoardGames();
         }
 
-        public static Stand GetNiveauForStand(char niveau)
+
+
+        public static Stand ParseStand(char niveau)
         {
-            for (int i = 0; i < Lager.Tilstande.Count(); i++)
-            {
-                if (Lager.Tilstande[i].Niveau == niveau)
-                {
-                    return Lager.Tilstande[i];
-                }
-            }
-            return null;
+            return (Stand)niveau.ToString().ToUpper()[0];  //Todo: Check, at det er en gyldig stand.
         }
 
         public static Genre ParseGenre(string navn)
