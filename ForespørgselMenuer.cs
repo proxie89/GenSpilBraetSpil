@@ -8,7 +8,8 @@ namespace ProjektGenspil
 {
     internal class ForespørgselMenuer
     {
-        public static List<Forespørgsel> forespørgsel = new List<Forespørgsel>(); //Til forespørgsler
+        Forespørgsel _forespørgsel = new Forespørgsel("Forespørgsel");
+        _forespørgsel.LoadForespørgsel
 
         public static void ForespørgselMenu()
         {
@@ -52,7 +53,7 @@ namespace ProjektGenspil
             }
         }
 
-        public static void AddForspørgsel() //Tilføj en Forespørgsel. Skal tildeles et ID
+        public static void AddForspørgsel(Forespørgsel forespørgselliste) //Tilføj en Forespørgsel. Skal tildeles et ID
         {
             Console.Clear();
             Console.WriteLine("Hvor mange forespørgsler vil du indtaste?");
@@ -72,71 +73,35 @@ namespace ProjektGenspil
                 Console.WriteLine("Indtast forespørgsels ID" + (i + 1) + ": ");
                 int _id = int.Parse(Console.ReadLine());
 
-                forespørgsel.Add(new Forespørgsel(_id, _kundenavn, _tlf, _brætspil));
+                Forespørgsel _spørgsel = new Forespørgsel(_id, _brætspil, _tlf, _brætspil);
+                forespørgsel.forespørgselliste.Add(_spørgsel);
                 Console.WriteLine($"Forespørgsel {_id} blev oprettet.\nSpil: {_brætspil}\nNavn: {_kundenavn}\nTlf: {_tlf}\n");
 
             }
 
-            GemForespørgsel();
+            forespørgselliste.GemForespørgsel();
         }
 
         
-        public static void GemForespørgsel()
-        {
-            using (StreamWriter swf = new StreamWriter("Forespørgsler.txt"))
-            {
-                foreach (Forespørgsel forespørgsel in forespørgsel)
-                {
-                    swf.WriteLine(forespørgsel.ToString());
-                }
-            }
-        }
 
-        public static void LoadForespørgsel()
-        {
-            var filePath = "Forespørgsler.txt";
-            if (!File.Exists(filePath))
-            {
-                GemForespørgsel();
-            }
-            using (StreamReader sr = new StreamReader(filePath))
-            {
-                while (true)
-                {
-                    string line = sr.ReadLine();
-
-                    if (line == null)
-                    {
-                        break;
-                    }
-                    if (line == "")
-                    {
-                        continue;
-                    }
-
-                    if (line == "")
-                    {
-                        continue; // Fortsætter loopet, når der er en linje uden tekst.
-                    }
-
-                    Forespørgsel forespørgsels = Forespørgsel.FromString(line);
-                    forespørgsel.Add(forespørgsels);
-                }
-            }
-        }
-
-        public static void SeListe()
+        public static void SeListe(Forespørgsel forespørgsel)
         {
             // Udskriv liste med forespørgsler
+            string IDPrintListe = "ID".PadRight(0);
+            string NavnPrintListe = "Kundenavn".PadRight(5);
+            string nummerPrintListe = "Tlf".PadRight(30);
+            string spilPrintListe = "Brætspil".PadRight(10);
+            
             Console.Clear();
             Console.WriteLine("=== Liste over forspørgsler ===");
-            if (forespørgsel.Count == 0)
+            Console.WriteLine($"{IDPrintListe}{NavnPrintListe}{nummerPrintListe}{spilPrintListe}");
+            if (Forespørgsel.forespørgselliste.Count == 0)
             {
                 Console.WriteLine("Ingen forespørgsler er blevet oprettet endnu.");
             }
             else
             {
-                foreach (var forespørgsels in forespørgsel)
+                foreach (var forespørgsels in Forespørgsel.forespørgselliste)
                 {
                     Console.WriteLine($"ID: {forespørgsels.Id} \nNavn: {forespørgsels.Kundenavn} \nTlf: {forespørgsels.Tlf}" +
                         $"\nBrætspil: {forespørgsels.Brætspil}  \n-------------------------------");
@@ -154,7 +119,7 @@ namespace ProjektGenspil
             int tal = Convert.ToInt32(Console.ReadLine());
 
             Forespørgsel forespørgselremove = null;
-            foreach (var forespørgsels in forespørgsel)
+            foreach (var forespørgsels in Forespørgsel.forespørgselliste)
             {
                 if (forespørgsels.Id == tal)
                 {
@@ -164,7 +129,7 @@ namespace ProjektGenspil
             }
             if (forespørgselremove != null)
             {
-                forespørgsel.Remove(forespørgselremove);
+                Forespørgsel.forespørgselliste.Remove(forespørgselremove);
                 Console.WriteLine($"{tal} er blevet slettet");
             }
             else
@@ -182,7 +147,7 @@ namespace ProjektGenspil
             int søgtID = int.Parse(Console.ReadLine());
 
             // Søg på person med det angivne ID
-            Forespørgsel søgtForespørgsel = forespørgsel.Find(f => f.Id == søgtID);
+            Forespørgsel søgtForespørgsel = Forespørgsel.forespørgselliste.Find(f => f.Id == søgtID);
             // Se om man kan søge på navn; 
 
 
