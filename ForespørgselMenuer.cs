@@ -8,8 +8,8 @@ namespace ProjektGenspil
 {
     internal class ForespørgselMenuer
     {
-        public static List<Forespørgsel> forespørgsel = new List<Forespørgsel>(); //Til forespørgsler
-
+        Forespørgsel _forespørgsel = new Forespørgsel("Forespørgsel.txt");
+        
         public static void ForespørgselMenu()
         {
             while (true)
@@ -72,71 +72,29 @@ namespace ProjektGenspil
                 Console.WriteLine("Indtast forespørgsels ID" + (i + 1) + ": ");
                 int _id = int.Parse(Console.ReadLine());
 
-                forespørgsel.Add(new Forespørgsel(_id, _kundenavn, _tlf, _brætspil));
+                Forespørgsel.forespørgsel.Add(new Forespørgsel(_id, _kundenavn, _tlf, _brætspil));
                 Console.WriteLine($"Forespørgsel {_id} blev oprettet.\nSpil: {_brætspil}\nNavn: {_kundenavn}\nTlf: {_tlf}\n");
 
             }
 
-            GemForespørgsel();
+            forespørgsel.GemForespørgsel();
         }
 
         
-        public static void GemForespørgsel()
-        {
-            using (StreamWriter swf = new StreamWriter("Forespørgsler.txt"))
-            {
-                foreach (Forespørgsel forespørgsel in forespørgsel)
-                {
-                    swf.WriteLine(forespørgsel.ToString());
-                }
-            }
-        }
-
-        public static void LoadForespørgsel()
-        {
-            var filePath = "Forespørgsler.txt";
-            if (!File.Exists(filePath))
-            {
-                GemForespørgsel();
-            }
-            using (StreamReader sr = new StreamReader(filePath))
-            {
-                while (true)
-                {
-                    string line = sr.ReadLine();
-
-                    if (line == null)
-                    {
-                        break;
-                    }
-                    if (line == "")
-                    {
-                        continue;
-                    }
-
-                    if (line == "")
-                    {
-                        continue; // Fortsætter loopet, når der er en linje uden tekst.
-                    }
-
-                    Forespørgsel forespørgsels = Forespørgsel.FromString(line);
-                    forespørgsel.Add(forespørgsels);
-                }
-            }
-        }
+       
 
         public static void SeListe()
         {
             // Udskriv liste med forespørgsler
             Console.Clear();
             Console.WriteLine("=== Liste over forspørgsler ===");
-            if (forespørgsel.Count == 0)
+            if (Forespørgsel.forespørgsel.Count == 0)
             {
                 Console.WriteLine("Ingen forespørgsler er blevet oprettet endnu.");
             }
             else
             {
-                foreach (var forespørgsels in forespørgsel)
+                foreach (var forespørgsels in Forespørgsel.forespørgsel)
                 {
                     Console.WriteLine($"ID: {forespørgsels.Id} \nNavn: {forespørgsels.Kundenavn} \nTlf: {forespørgsels.Tlf}" +
                         $"\nBrætspil: {forespørgsels.Brætspil}  \n-------------------------------");
@@ -154,7 +112,7 @@ namespace ProjektGenspil
             int tal = Convert.ToInt32(Console.ReadLine());
 
             Forespørgsel forespørgselremove = null;
-            foreach (var forespørgsels in forespørgsel)
+            foreach (var forespørgsels in Forespørgsel.forespørgsel)
             {
                 if (forespørgsels.Id == tal)
                 {
@@ -164,7 +122,7 @@ namespace ProjektGenspil
             }
             if (forespørgselremove != null)
             {
-                forespørgsel.Remove(forespørgselremove);
+                Forespørgsel.forespørgsel.Remove(forespørgselremove);
                 Console.WriteLine($"{tal} er blevet slettet");
             }
             else
@@ -182,7 +140,7 @@ namespace ProjektGenspil
             int søgtID = int.Parse(Console.ReadLine());
 
             // Søg på person med det angivne ID
-            Forespørgsel søgtForespørgsel = forespørgsel.Find(f => f.Id == søgtID);
+            Forespørgsel søgtForespørgsel = Forespørgsel.forespørgsel.Find(f => f.Id == søgtID);
             // Se om man kan søge på navn; 
 
 
