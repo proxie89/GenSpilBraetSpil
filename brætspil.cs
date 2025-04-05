@@ -39,21 +39,28 @@ namespace ProjektGenspil
         public override string ToString()
         {
 
-            return  Navn.PadRight(40) + " |   " + Stand.Niveau + "   |   " + MinAntalSpillere + " - " + MaxAntalSpillere + "   |   " + AntalPåLager + "   |   " + Pris.ToString().PadRight(7) + " | " + Genre.Navn;
+            return  Navn + "|" + (char)Stand + "|" + MinAntalSpillere + "|" + MaxAntalSpillere + "|" + AntalPåLager + "|" + Pris + "|" + Genre;
+
+        }
+
+        public string ToPrettyString()
+        {
+
+            return Navn.PadRight(40) + " |   " + (char)Stand + "   |   " + MinAntalSpillere + " - " + MaxAntalSpillere + "   |   " + AntalPåLager + "   |   " + Pris.ToString().PadRight(7) + " | " + Genre;
 
         }
 
         public static Brætspil FromString(string line)
         {
-            string[] lineParts = line.Split(" | ");  // Her splittes linjen i tekstfilen op i 6 dele.
+            string[] lineParts = line.Split("|");  // Her splittes linjen i tekstfilen op i 7 dele.
 
             string navn = lineParts[0];
-            Stand stand = BrætspilMenuer.GetNiveauForStand(char.Parse(lineParts[1]));
+            Stand stand = BrætspilMenuer.ParseStand(char.Parse(lineParts[1]));
             int minAntalSpillere = int.Parse(lineParts[2]);
             int maxAntalSpillere = int.Parse(lineParts[3]);
             int antalPåLager = int.Parse(lineParts[4]);
             decimal pris = decimal.Parse(lineParts[5]);
-            Genre genre = BrætspilMenuer.GetNavnForGenre(lineParts[6]);  // Laves på samme måde som GetNiveauForStand.
+            Genre genre = BrætspilMenuer.ParseGenre(lineParts[6]);  // Laves på samme måde som GetNiveauForStand.
 
             Brætspil brætspil = new Brætspil(navn, stand, minAntalSpillere, maxAntalSpillere, antalPåLager, pris, genre);  // Her laves et brætspilsobjekt ud fra de 3 dele.
             return brætspil;

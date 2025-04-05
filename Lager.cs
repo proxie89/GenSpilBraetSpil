@@ -11,22 +11,7 @@ namespace ProjektGenspil
         public string FilePathBrætspil { get; set; } = "Brætspil.txt";// Sti til filen, der gemmer data
 
         public List<Brætspil> BrætspilsListe = new List<Brætspil>();
-        public static List<Stand> Tilstande =
-            [
-                new Stand('A', "Super stand - Næsten som nyt."),
-                new Stand('B', "God stand - Almindelige brugsspor (mindre ridser/skrammer)."),
-                new Stand('C', "Rimelig stand - Tydelige brugsspor (flere ridser/skrammer)."),
-                new Stand('D', "Ringe stand - Meget slidt."),
-                new Stand('E', "Mangelfuldt - Mangler dele. Kan bruges til reservedele."),
-            ];
-        public static List<Genre> Genrer =
-           [
-                new Genre("Familiespil"),
-                new Genre("Selskabspil"),
-                new Genre("Strategispil"),
-                new Genre("Voksenspil"),
-            ];
-
+       
         public Lager(string filePathBrætspil)   // Konstruktør placeres typisk mellem felterne ovenover og metoder nedenunder.
         {
             FilePathBrætspil = filePathBrætspil; // Sætter filstien ved oprettelse af DataHandler
