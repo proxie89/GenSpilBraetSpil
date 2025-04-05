@@ -12,6 +12,7 @@ namespace ProjektGenspil
         public string Kundenavn { get; private set; }
         public int Tlf { get; private set; }
         public string Brætspil { get; private set; }
+
         public string FilePathforespørgsel { get; set; } = "Forespørgsel.txt";
 
 
@@ -51,8 +52,8 @@ namespace ProjektGenspil
             int _tlf = int.Parse(lineParts[2]);
             string _brætspil = lineParts[3];
 
-            Forespørgsel _forespørgsels = new Forespørgsel(_id, _kundenavn, _tlf, _brætspil);
-            return _forespørgsels;
+            Forespørgsel _forespørgsel = new Forespørgsel(_id, _kundenavn, _tlf, _brætspil);
+            return _forespørgsel;
         }
         public void GemForespørgsel()
         {
@@ -92,8 +93,8 @@ namespace ProjektGenspil
                         continue; // Fortsætter loopet, når der er en linje uden tekst.
                     }
 
-                    Forespørgsel _forespørgsels = Forespørgsel.FromString(line);
-                    forespørgsel.Add(_forespørgsels);
+                    Forespørgsel _forespørgsel = Forespørgsel.FromString(line);
+                    forespørgsel.Add(_forespørgsel);
                 }
             }
         }

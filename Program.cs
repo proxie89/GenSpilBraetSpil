@@ -10,7 +10,7 @@ namespace ProjektGenspil
             Lager lager = new Lager("Brætspil.txt");  // Dette er et lagerobjekt.
             lager.LoadBoardGames();
            
-            ForespørgselMenuer.LoadForespørgsel();
+            //ForespørgselMenuer.LoadForespørgsel();
             
             while (true)
             {

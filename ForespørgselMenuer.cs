@@ -55,6 +55,7 @@ namespace ProjektGenspil
         public static void AddForspørgsel() //Tilføj en Forespørgsel. Skal tildeles et ID
         {
             Console.Clear();
+
             Console.WriteLine("Hvor mange forespørgsler vil du indtaste?");
             int antalFor = int.Parse(Console.ReadLine());
             for (int i = 0; i < antalFor; i++)
@@ -77,7 +78,7 @@ namespace ProjektGenspil
 
             }
 
-            forespørgsel.GemForespørgsel();
+            forespørgsels.GemForespørgsel();
         }
 
         
