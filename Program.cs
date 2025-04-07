@@ -15,10 +15,10 @@ namespace ProjektGenspil
             while (true)
             {
                 Console.Clear(); // Rydder skærmen for en ren menuvisning
-                Console.WriteLine("=== Hovedmenu ===\n");
+                Console.WriteLine("======= Hovedmenu =======\n");
                 Console.WriteLine("1. Tilføj brætspil til listen\n");
-                Console.WriteLine("2. Søg efter brætspil\n");
-                Console.WriteLine("3. Vis brætspilsliste\n");
+                Console.WriteLine("2. Vis brætspilsliste\n");
+                Console.WriteLine("3. Søg efter brætspil\n");
                 Console.WriteLine("4. Slet et brætspilsnavn\n");
                 Console.WriteLine("5. Til forespørgselsmenuer\n");
                 Console.WriteLine("6. Afslut programmet\n");
@@ -33,12 +33,12 @@ namespace ProjektGenspil
                         BrætspilMenuer.AddBoardGame(lager);
                         break;
                     case "2":
-                        Console.WriteLine("\nSøg efter brætspil");
-                        BrætspilMenuer.SøgBrætSpilMenu(lager);
-                        break;
-                    case "3":
                         Console.WriteLine("\nVis liste af brætspil");
                         BrætspilMenuer.PrintList(lager);
+                        break;
+                    case "3":
+                        Console.WriteLine("\nSøg efter brætspil");
+                        BrætspilMenuer.SøgBrætSpilMenu(lager);
                         break;
                     case "4":
                         Console.WriteLine("\nSlet brætspil");

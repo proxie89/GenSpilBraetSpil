@@ -50,7 +50,8 @@ namespace ProjektGenspil
     //            new Stand('A', "Super stand - Næsten som nyt."),
     //            new Stand('B', "God stand - Almindelige brugsspor (mindre ridser/skrammer)."),
     //            new Stand('C', "Rimelig stand - Tydelige brugsspor (flere ridser/skrammer)."),
-    //            new Stand('D', "Ringe stand - Meget slidt."),
+    //            new
+    //            Stand('D', "Ringe stand - Meget slidt."),
     //            new Stand('E', "Mangelfuldt - Mangler dele. Kan bruges til reservedele."),
     //        ];
 
