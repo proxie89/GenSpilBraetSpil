@@ -17,10 +17,11 @@ namespace ProjektGenspil
                 Console.Clear(); // Rydder skærmen for en ren menuvisning
                 Console.WriteLine("=== Hovedmenu ===\n");
                 Console.WriteLine("1. Tilføj brætspil til listen\n");
-                Console.WriteLine("2. Vis brætspilsliste\n");
-                Console.WriteLine("3. Slet et brætspilsnavn\n");
-                Console.WriteLine("4. Til forespørgselsmenuer\n");
-                Console.WriteLine("5. Afslut programmet\n");
+                Console.WriteLine("2. Søg efter brætspil\n");
+                Console.WriteLine("3. Vis brætspilsliste\n");
+                Console.WriteLine("4. Slet et brætspilsnavn\n");
+                Console.WriteLine("5. Til forespørgselsmenuer\n");
+                Console.WriteLine("6. Afslut programmet\n");
                 Console.Write("Vælg en mulighed: ");
 
                 string input = Console.ReadLine();
@@ -32,18 +33,22 @@ namespace ProjektGenspil
                         BrætspilMenuer.AddBoardGame(lager);
                         break;
                     case "2":
+                        Console.WriteLine("\nSøg efter brætspil");
+                        BrætspilMenuer.SøgBrætSpilMenu(lager);
+                        break;
+                    case "3":
                         Console.WriteLine("\nVis liste af brætspil");
                         BrætspilMenuer.PrintList(lager);
                         break;
-                    case "3":
+                    case "4":
                         Console.WriteLine("\nSlet brætspil");
                         BrætspilMenuer.DeleteBoardGame(lager);
                         break;
-                    case "4":
+                    case "5":
                         Console.WriteLine("\nForespørgsel menuer.");
                         ForespørgselMenuer.ForespørgselMenu();
                         break;
-                    case "5":
+                    case "6":
                         Console.WriteLine("Farvel!");
                         return; // Afslutter programmet
                     default:

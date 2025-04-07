@@ -17,23 +17,23 @@ namespace ProjektGenspil
         private decimal _pris;  // Decimal, fordi det er ti-tals-systemet. Det bruges der til penge, hvor vi runder af til decimaler.
         private Genre _genre;
 
-        public string Navn { get { return _navn; } set { _navn = value; } }
-        public Stand Stand { get { return _stand; } set { _stand = value; } }
-        public int MinAntalSpillere { get { return _minAntalSpillere; } set { _minAntalSpillere = value; } }
-        public int MaxAntalSpillere { get { return _maxAntalSpillere; } set { _maxAntalSpillere = value; } }
-        public int AntalPåLager { get { return _antalPåLager; } set { _antalPåLager = value; } }
-        public decimal Pris { get { return _pris; } set { _pris = value; } }
-        public Genre Genre { get { return _genre; } set { _genre = value; } }
+        public string Navn { get; set; }
+        public Stand Stand { get; set; }
+        public int MinAntalSpillere { get; set; }
+        public int MaxAntalSpillere { get; set; }
+        public int AntalPåLager { get; set; }
+        public decimal Pris { get; set; }
+        public Genre Genre { get; set; }
 
-        public Brætspil(string navn, Stand stand, int minAntalSpillere, int maxAntalSpillere, int antalPåLager, decimal pris, Genre genre)
+        public Brætspil(string _navn, Stand _stand, int _minAntalSpillere, int _maxAntalSpillere, int _antalPåLager, decimal _pris, Genre _genre)
         {
-            _navn = navn;
-            _stand = stand;
-            _minAntalSpillere = minAntalSpillere;
-            _maxAntalSpillere = maxAntalSpillere;
-            _antalPåLager = antalPåLager;
-            _pris = pris;
-            _genre = genre;
+            Navn = _navn;
+            Stand = _stand;
+            MinAntalSpillere = _minAntalSpillere;
+            MaxAntalSpillere = _maxAntalSpillere;
+            AntalPåLager = _antalPåLager;
+            Pris = _pris;
+            Genre = _genre;
         }
                 
         public override string ToString()
@@ -46,7 +46,7 @@ namespace ProjektGenspil
         public string ToPrettyString()
         {
 
-            return Navn.PadRight(40) + " |   " + (char)Stand + "   |   " + MinAntalSpillere + " - " + MaxAntalSpillere + "   |   " + AntalPåLager + "   |   " + Pris.ToString().PadRight(7) + " | " + Genre;
+            return Navn.PadRight(40) + "   |  " + (char)Stand + "  |   " + MinAntalSpillere + " - " + MaxAntalSpillere + "   |   " + AntalPåLager + "   |   " + Pris.ToString().PadRight(7) + " | " + Genre;
 
         }
 

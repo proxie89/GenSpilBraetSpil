@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,7 +11,94 @@ namespace ProjektGenspil
 {
     internal class BrætspilMenuer
     {
-       
+        public static List<Brætspil> brætspil = new List<Brætspil> ();
+
+        public static void SøgBrætSpilMenu(Lager lager)
+          
+        {
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("=== SøgeMenu ===\n");
+                Console.WriteLine("1. Søg efter navn\n");
+             /* Console.WriteLine("2. Søg efter genre\n");
+                Console.WriteLine("3. Søg efter antal spillere\n");
+                Console.WriteLine("4. Søg efter stand\n");
+               */ 
+                Console.WriteLine("5. Tilbage til hovedmenu!\n");
+                Console.Write("Vælg en mulighed: ");
+               
+                string input = Console.ReadLine();
+
+                switch (input)
+                {
+                    case "1":
+                        SøgBrætSpilNavn(lager);
+                        break;
+                    /*case "2":
+                        //SøgBrætSpilNavn()
+                        break;
+                    case "3":
+                        //SøgBrætSpilNavn()
+                        break;
+                    */case "4":
+                        //--
+                        break;
+                    case "5":
+                        Console.WriteLine("Vend tilbage til Hovedmenu!");
+                        return; // Afslutter programmet her
+                    
+                    default:
+                        Console.WriteLine("Ugyldigt valg, prøv igen.");
+                        break;
+                }
+
+                Console.WriteLine("Tryk på en tast for at fortsætte...");
+                Console.ReadKey();
+
+            }
+
+        }
+
+        public static void SøgBrætSpilNavn(Lager lager)
+        {
+            Console.WriteLine("Indtast navnet på det spil du vil søge på:");
+            string søgtNavn = Console.ReadLine();
+
+            // Tilføjer det til en liste, så den kan referere til listen for at se hvor mange der er.
+            List<Brætspil> fundneSpil = new List<Brætspil>();
+            foreach (var spil in lager.BrætspilsListe)
+            {
+                if (spil.Navn == søgtNavn)
+                {
+                    fundneSpil.Add(spil); 
+                }
+            }
+
+            // Her ser den om fundnespil er mere end én og så printer dem dem. 
+            if (fundneSpil.Count > 0)
+            {
+                Console.WriteLine($"Fandt {fundneSpil.Count} spil med navnet \"{søgtNavn}\":");
+                for (int i = 0; i < fundneSpil.Count; i++)
+                {
+                    var spil = fundneSpil[i];
+                    Console.WriteLine($"Spil {i + 1}:");
+                    Console.WriteLine("----------------------");
+                    Console.WriteLine($"  Navn: {spil.Navn}");
+                    Console.WriteLine($"  Stand: {spil.Stand}");
+                    Console.WriteLine($"  AntalSpillere:{spil.MinAntalSpillere} - {spil.MaxAntalSpillere}");
+                    Console.WriteLine($"  Pris: {spil.Pris} kr");
+                    Console.WriteLine($"  Genre: {spil.Genre}");
+                    Console.WriteLine(); 
+                }
+            }
+            else
+            {
+                Console.WriteLine("Spillet kan ikke findes.");
+            }
+        }
+
+
         public static void AddBoardGame(Lager lager)
         {
             Console.Clear();
@@ -103,7 +191,7 @@ namespace ProjektGenspil
 
         public static void DeleteBoardGame(Lager lager) 
         {
-            string indexPrintList = "".PadRight(4);
+            string indexPrintList = "    ".PadRight(4);
             string titelPrintList = "Navn".PadRight(43);
             string standPrintList = "Stand".PadRight(8);
             string antalSpillerePrintList1 = "#".PadRight(2);
