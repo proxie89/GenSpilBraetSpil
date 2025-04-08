@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,7 +27,7 @@ namespace ProjektGenspil
             // Sæt brætspils navn ind, så man kan søge på den. 
 
         }
-        
+
         public static List<Forespørgsel> forespørgsel = new List<Forespørgsel>(); //Til forespørgsler
 
         public Forespørgsel(string filePathforespørgsel)   // Konstruktør placeres typisk mellem felterne ovenover og metoder nedenunder.
@@ -61,7 +62,7 @@ namespace ProjektGenspil
             return _forespørgsel;
         }
 
-        
+
 
         public static void GemForespørgsel()
         {
@@ -76,7 +77,7 @@ namespace ProjektGenspil
 
         public void LoadForespørgsel()
         {
-            
+
             if (!File.Exists(FilePathforespørgsel))
             {
                 GemForespørgsel();
@@ -134,7 +135,7 @@ namespace ProjektGenspil
 
             GemForespørgsel();
         }
-
+        /*
         public static void SeListe()
         {
             string fIDPrintList = "".PadRight(7);
@@ -165,6 +166,14 @@ namespace ProjektGenspil
             }
             //static List<Forespørgsel> forespøgsel = new List<Forespørgsel>();
 
+        }
+        */
+        public static void ForespørgselPrintList()
+        {
+            Console.Clear();
+            ForespørgselPrintBuilder(forespørgsel, "Liste over alle forespørgsler:"); // Pass lager.BrætspilsListe
+            Console.WriteLine("Tryk på en tast for at fortsætte...");
+            Console.ReadKey();
         }
 
         public static void SletForespørgsel()
@@ -218,11 +227,43 @@ namespace ProjektGenspil
             }
 
         }
-        
+
+        public static void ForespørgselPrintBuilder(List<Forespørgsel> FList, string title = "Liste over forespørgsler:")
+        {
+            Console.Clear();
+            Console.WriteLine(title);
+            if (forespørgsel.Count == 0)
+            {
+                Console.WriteLine("Ingen forespørgsler i listen!");
+                return;
+            }
+
+            // Print hovedlisten
+            Console.WriteLine("Id".PadRight(0) + "Navn".PadRight(15) + "Tlf".PadRight(15) + "Brætspil".PadRight(15));
+            Console.WriteLine(new string('=', 30 + 8 + 12 + 8 + 8 + 20));
+
+            // Beregner den største bredde af navne
+            int maxIndexWidth = FList.Count.ToString().Length + 2;
+
+            // Print med samme værdier
+            for (int i = 0; i < FList.Count; i++)
+            {
+                var fList = FList[i];
+
+                string index = $"[{i + 1}]";
+                string formattedIndex = index.PadRight(maxIndexWidth);
+                string Id = fList.Id.ToString();
+                string Kundenavn = fList.Kundenavn;
+                string Tlf = fList.Tlf.ToString().ToString();
+                string Brætspil = fList.Brætspil.ToString();
+
+
+                Console.WriteLine($"{formattedIndex} {Id.ToString().PadRight(0)} {Kundenavn.PadRight(15)} {Tlf.ToString().PadRight(15)} {Brætspil.PadRight(15)}");
+            }
 
 
 
-
+        }
     }
 
 }
