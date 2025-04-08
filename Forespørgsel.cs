@@ -45,7 +45,7 @@ namespace ProjektGenspil
 
         public string fToPrettyString()
         {
-            return Id.ToString().PadRight(0) + " | " + Kundenavn.PadRight(10) + " | " + Tlf.ToString().PadRight(10) + " | " + Brætspil;
+            return Id.ToString().PadRight(0) + " | " + Kundenavn.PadRight(20) + " | " + Tlf.ToString().PadRight(20) + " | " + Brætspil;
         }
 
         public static Forespørgsel FromString(string line)
@@ -138,9 +138,9 @@ namespace ProjektGenspil
         public static void SeListe()
         {
             string fIDPrintList = "".PadRight(7);
-            string fNAVNPrintList = "Navn".PadRight(14);
-            string fTLFPrintList = "TLF".PadRight(12);
-            string fBRÆTSPILPrintList = "Brætspil".PadRight(12);
+            string fNAVNPrintList = "Navn".PadRight(24);
+            string fTLFPrintList = "TLF".PadRight(22);
+            string fBRÆTSPILPrintList = "Brætspil".PadRight(22);
 
             // Udskriv liste med forespørgsler
             Console.Clear();
