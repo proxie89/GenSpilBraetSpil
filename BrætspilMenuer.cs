@@ -112,6 +112,18 @@ namespace ProjektGenspil
             {
                 Console.Write("Indtast navn på Brætspil: ");
                 string navn = Console.ReadLine();
+                                                                                    /* HVORFOR VIRKER IKKE DENNE SØGNING*/
+                                                                                    /* HVORFOR VIRKER IKKE DENNE SØGNING*/
+                foreach (var item in lager.BrætspilsListe)                          /* HVORFOR VIRKER IKKE DENNE SØGNING*/
+                {
+                    if (lager.ForespørgselsListe.Any(x => x.Brætspil == navn))
+                    {
+                        Console.WriteLine("Der findes allerede et brætspil med dette navn på lager!!!"); ;
+                    }
+
+                }
+
+
 
                 Console.WriteLine("Indtast hvilken stand brætspillet er i. Vælg et af følgende bogstaver:\n");
                 Stand[] tilstande = Enum.GetValues<Stand>();

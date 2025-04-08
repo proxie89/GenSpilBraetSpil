@@ -70,6 +70,15 @@ namespace ProjektGenspil
                 Console.WriteLine("Hvilket spil vil kunden gerne oprette forespørgsel på?");
                 string _brætspil = Console.ReadLine();
 
+                foreach(var item in lager.BrætspilsListe)
+                {
+                    if (lager.BrætspilsListe.Any(x => x.Navn == _brætspil))
+                    {
+                        Console.WriteLine("Der findes allerede et brætspil med dette navn på lager!!!"); ;
+                    }
+
+                }
+
                 Console.WriteLine("Indtast kundens navn");
                 string _kundenavn = Console.ReadLine();
 
@@ -120,6 +129,19 @@ namespace ProjektGenspil
 
         }
 
+  /*      public void TjekForEksisterende(DataLager lager)
+        {
+
+            foreach (var item in lager.BrætspilsListe)
+            {
+                if (lager.BrætspilsListe.Contains(_brætspil))
+                {
+                    Console.WriteLine("Der findes allerede et brætspil med dette navn på lager!!!"); ;
+                }
+                
+            }
+        }
+  */
         public static void SletForespørgsel(DataLager lager)
         {
             //Indsæt slet forespørgsel
