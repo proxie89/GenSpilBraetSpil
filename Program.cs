@@ -11,10 +11,10 @@ namespace ProjektGenspil
             lager.LoadBoardGames();
             Forespørgsel forespørgsel = new Forespørgsel("Forespørgsler.txt");
             forespørgsel.LoadForespørgsel();
-            
-           
+
+
             //ForespørgselMenuer.LoadForespørgsel();
-            
+
             while (true)
             {
                 Console.Clear(); // Rydder skærmen for en ren menuvisning
@@ -49,7 +49,7 @@ namespace ProjektGenspil
                         break;
                     case "5":
                         Console.WriteLine("\nForespørgsel menuer.");
-                        ForespørgselMenuer.ForespørgselMenu();
+                        ForespørgselMenu();
                         break;
                     case "6":
                         Console.WriteLine("Farvel!");
@@ -63,8 +63,50 @@ namespace ProjektGenspil
                 Console.ReadKey();
             }
         }
+        public static void ForespørgselMenu()
+        {
+            while (true)
+            {
+                Console.Clear(); // Rydder skærmen for en ren menuvisning
+                Console.WriteLine("=== Forespørgselmenu ===\n");
+                Console.WriteLine("1. Opret forespørgsel\n");
+                Console.WriteLine("2. Se liste med forespørgsler\n");
+                Console.WriteLine("3. Slet forespørgsel\n");
+                Console.WriteLine("4. Søg på forespørgsel\n");
+                Console.WriteLine("5. Tilbage til hovedmenu!\n");
+                Console.Write("Vælg en mulighed: ");
+
+                string input = Console.ReadLine();
+
+                switch (input)
+                {
+                    case "1":
+                        Forespørgsel.AddForspørgsel();
+                        break;
+                    case "2":
+                        Forespørgsel.SeListe();
+                        break;
+                    case "3":
+                        Forespørgsel.SletForespørgsel();
+                        break;
+                    case "4":
+                        Forespørgsel.SøgForespørgsel();
+                        break;
+                    case "5":
+                        Console.WriteLine("Vend tilbage til Hovedmenu!");
+                        return; // Afslutter programmet her
+                    default:
+                        Console.WriteLine("Ugyldigt valg, prøv igen.");
+                        break;
+                }
+
+                Console.WriteLine("Tryk på en tast for at fortsætte...");
+                Console.ReadKey();
+            }
 
 
+        }
     }
 }
+
 
