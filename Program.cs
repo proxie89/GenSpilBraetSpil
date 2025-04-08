@@ -84,7 +84,7 @@ namespace ProjektGenspil
                         Forespørgsel.AddForspørgsel();
                         break;
                     case "2":
-                        Forespørgsel.SeListe();
+                        Forespørgsel.ForespørgselPrintList();
                         break;
                     case "3":
                         Forespørgsel.SletForespørgsel();
