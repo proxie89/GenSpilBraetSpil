@@ -3,17 +3,13 @@ using System.Collections.Generic;
 
 namespace ProjektGenspil
 {
-    class Program
+    public class Program
     {
-        static void Main()
+        public static void Main()
         {
-            Lager lager = new Lager("Brætspil.txt");  // Dette er et lagerobjekt.
+            DataLager lager = new DataLager("Brætspil.txt", "Forespørgsler.txt");  // Dette er et lagerobjekt.
             lager.LoadBoardGames();
-            Forespørgsel forespørgsel = new Forespørgsel("Forespørgsler.txt");
-            forespørgsel.LoadForespørgsel();
-
-
-            //ForespørgselMenuer.LoadForespørgsel();
+            lager.LoadForespørgsel();
 
             while (true)
             {
@@ -49,7 +45,7 @@ namespace ProjektGenspil
                         break;
                     case "5":
                         Console.WriteLine("\nForespørgsel menuer.");
-                        ForespørgselMenu();
+                        ForespørgselMenu(lager);
                         break;
                     case "6":
                         Console.WriteLine("Farvel!");
@@ -63,7 +59,7 @@ namespace ProjektGenspil
                 Console.ReadKey();
             }
         }
-        public static void ForespørgselMenu()
+        public static void ForespørgselMenu(DataLager lager)
         {
             while (true)
             {
@@ -81,16 +77,16 @@ namespace ProjektGenspil
                 switch (input)
                 {
                     case "1":
-                        Forespørgsel.AddForspørgsel();
+                        Forespørgsel.AddForspørgsel(lager);
                         break;
                     case "2":
-                        Forespørgsel.SeListe();
+                        Forespørgsel.SeListe(lager);
                         break;
                     case "3":
-                        Forespørgsel.SletForespørgsel();
+                        Forespørgsel.SletForespørgsel(lager);
                         break;
                     case "4":
-                        Forespørgsel.SøgForespørgsel();
+                        Forespørgsel.SøgForespørgsel(lager);
                         break;
                     case "5":
                         Console.WriteLine("Vend tilbage til Hovedmenu!");

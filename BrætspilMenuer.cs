@@ -13,7 +13,7 @@ namespace ProjektGenspil
     {
         public static List<Brætspil> brætspil = new List<Brætspil> ();
 
-        public static void SøgBrætSpilMenu(Lager lager)
+        public static void SøgBrætSpilMenu(DataLager lager)
           
         {
             while (true)
@@ -60,7 +60,7 @@ namespace ProjektGenspil
 
         }
 
-        public static void SøgBrætSpilNavn(Lager lager)
+        public static void SøgBrætSpilNavn(DataLager lager)
 
         {
             Console.Clear();
@@ -102,7 +102,7 @@ namespace ProjektGenspil
         }
 
 
-        public static void AddBoardGame(Lager lager)
+        public static void AddBoardGame(DataLager lager)
         {
             Console.Clear();
 
@@ -162,7 +162,7 @@ namespace ProjektGenspil
             return Enum.Parse<Genre>(navn);
         }
 
-        public static void PrintList(Lager lager)
+        public static void PrintList(DataLager lager)
         {
             Console.Clear();
             PrintBuilder(lager.BrætspilsListe, "Liste over alle brætspil:"); // Pass lager.BrætspilsListe
@@ -170,7 +170,7 @@ namespace ProjektGenspil
             Console.ReadKey();
         }
 
-        public static void DeleteBoardGame(Lager lager)
+        public static void DeleteBoardGame(DataLager lager)
         {
             Console.Clear();
             PrintBuilder(lager.BrætspilsListe);
@@ -243,7 +243,7 @@ namespace ProjektGenspil
             }
 
             // Print hovedlisten
-            Console.WriteLine("Navn".PadRight(35) + "Stand".PadRight(8) + "# Spillere".PadRight(16) + "Lager".PadRight(11) + "Pris".PadRight(9) + "Genre");
+            Console.WriteLine("Navn".PadRight(35) + "Stand".PadRight(8) + "# Spillere".PadRight(16) + "DataLager".PadRight(11) + "Pris".PadRight(9) + "Genre");
             Console.WriteLine(new string('=', 30 + 8 + 12 + 8 + 8 + 20)); 
 
             // Beregner den største bredde af navne

@@ -26,14 +26,11 @@ namespace ProjektGenspil
             // Sæt brætspils navn ind, så man kan søge på den. 
 
         }
-        
-        public static List<Forespørgsel> forespørgsel = new List<Forespørgsel>(); //Til forespørgsler
 
-        public Forespørgsel(string filePathforespørgsel)   // Konstruktør placeres typisk mellem felterne ovenover og metoder nedenunder.
-        {
-            FilePathforespørgsel = filePathforespørgsel; // Sætter filstien ved oprettelse af DataHandler
-        }
-
+        //public Forespørgsel(string filePathforespørgsel)   // Konstruktør placeres typisk mellem felterne ovenover og metoder nedenunder.
+        //{
+        //    FilePathforespørgsel = filePathforespørgsel; // Sætter filstien ved oprettelse af DataHandler
+        //}
 
         //public string FilePathForespørgsel { get; set; } = "Forespørgsel.txt";
 
@@ -61,52 +58,8 @@ namespace ProjektGenspil
             return _forespørgsel;
         }
 
-        
 
-        public static void GemForespørgsel()
-        {
-            using (StreamWriter sw = new StreamWriter("Forespørgsler.txt"))
-            {
-                foreach (Forespørgsel forespørgsel in forespørgsel)
-                {
-                    sw.WriteLine(forespørgsel.ToString());
-                }
-            }
-        }
-
-        public void LoadForespørgsel()
-        {
-            
-            if (!File.Exists(FilePathforespørgsel))
-            {
-                GemForespørgsel();
-            }
-            using (StreamReader sr = new StreamReader(FilePathforespørgsel))
-            {
-                while (true)
-                {
-                    string line = sr.ReadLine();
-
-                    if (line == null)
-                    {
-                        break;
-                    }
-                    if (line == "")
-                    {
-                        continue;
-                    }
-
-                    if (line == "")
-                    {
-                        continue; // Fortsætter loopet, når der er en linje uden tekst.
-                    }
-
-                    Forespørgsel _forespørgsel = Forespørgsel.FromString(line);
-                    forespørgsel.Add(_forespørgsel);
-                }
-            }
-        }
-        public static void AddForspørgsel() //Tilføj en Forespørgsel. Skal tildeles et ID
+        public static void AddForspørgsel(DataLager lager) //Tilføj en Forespørgsel. Skal tildeles et ID
         {
             Console.Clear();
 
@@ -127,15 +80,18 @@ namespace ProjektGenspil
                 Console.WriteLine("Indtast forespørgsels ID" + (i + 1) + ": ");
                 int _id = int.Parse(Console.ReadLine());
 
-                Forespørgsel.forespørgsel.Add(new Forespørgsel(_id, _kundenavn, _tlf, _brætspil));
+                Forespørgsel forespørgsel = new Forespørgsel(_id, _kundenavn, _tlf, _brætspil);
+                lager.ForespørgselsListe.Add(forespørgsel);
                 Console.WriteLine($"Forespørgsel {_id} blev oprettet.\nSpil: {_brætspil}\nNavn: {_kundenavn}\nTlf: {_tlf}\n");
+                //Forespørgsel.ForespørgselsListe.Add(new Forespørgsel(_id, _kundenavn, _tlf, _brætspil));
+                //Console.WriteLine($"Forespørgsel {_id} blev oprettet.\nSpil: {_brætspil}\nNavn: {_kundenavn}\nTlf: {_tlf}\n");
 
             }
 
-            GemForespørgsel();
+            lager.GemForespørgsel();
         }
 
-        public static void SeListe()
+        public static void SeListe(DataLager lager)
         {
             string fIDPrintList = "".PadRight(7);
             string fNAVNPrintList = "Navn".PadRight(24);
@@ -146,35 +102,32 @@ namespace ProjektGenspil
             Console.Clear();
             Console.WriteLine("=== Liste over forspørgsler ===");
             Console.WriteLine($"{fIDPrintList}{fNAVNPrintList}{fTLFPrintList}{fBRÆTSPILPrintList}");
-            if (Forespørgsel.forespørgsel.Count == 0)
+            if (lager.ForespørgselsListe.Count == 0)
             {
                 Console.WriteLine("Ingen forespørgsler er blevet oprettet endnu.");
             }
             else
             {
-                for (int i = 0; i < Forespørgsel.forespørgsel.Count; i++)
+                for (int i = 0; i < lager.ForespørgselsListe.Count; i++)
                 {
                     //Console.WriteLine($"ID: {forespørgsels.Id} \nNavn: {forespørgsels.Kundenavn} \nTlf: {forespørgsels.Tlf}" +
                     //$"\nBrætspil: {forespørgsels.Brætspil}  \n-------------------------------");
-                    var forespørgsel = Forespørgsel.forespørgsel[i];
+                    var forespørgsel = lager.ForespørgselsListe[i];
                     Console.WriteLine($"[{i + 1}] {forespørgsel.fToPrettyString()}");
-
-
-
                 }
             }
             //static List<Forespørgsel> forespøgsel = new List<Forespørgsel>();
 
         }
 
-        public static void SletForespørgsel()
+        public static void SletForespørgsel(DataLager lager)
         {
             //Indsæt slet forespørgsel
             Console.WriteLine("Indtast nummeret på den forespørgsel du ønsker at slette");
             int tal = Convert.ToInt32(Console.ReadLine());
 
             Forespørgsel forespørgselremove = null;
-            foreach (var forespørgsels in Forespørgsel.forespørgsel)
+            foreach (var forespørgsels in lager.ForespørgselsListe)
             {
                 if (forespørgsels.Id == tal)
                 {
@@ -184,7 +137,7 @@ namespace ProjektGenspil
             }
             if (forespørgselremove != null)
             {
-                Forespørgsel.forespørgsel.Remove(forespørgselremove);
+                lager.ForespørgselsListe.Remove(forespørgselremove);
                 Console.WriteLine($"{tal} er blevet slettet");
             }
             else
@@ -193,7 +146,7 @@ namespace ProjektGenspil
             }
         }
 
-        public static void SøgForespørgsel()
+        public static void SøgForespørgsel(DataLager lager)
         {
             // tilføj søge funktion
             //Spørg bruger hvilket ID han leder efter
@@ -202,7 +155,7 @@ namespace ProjektGenspil
             int søgtID = int.Parse(Console.ReadLine());
 
             // Søg på person med det angivne ID
-            Forespørgsel søgtForespørgsel = Forespørgsel.forespørgsel.Find(f => f.Id == søgtID);
+            Forespørgsel søgtForespørgsel = lager.ForespørgselsListe.Find(f => f.Id == søgtID);
             // Se om man kan søge på navn; 
 
 
@@ -218,10 +171,6 @@ namespace ProjektGenspil
             }
 
         }
-        
-
-
-
 
     }
 

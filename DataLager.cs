@@ -6,15 +6,18 @@ using System.Threading.Tasks;
 
 namespace ProjektGenspil
 {
-    public class Lager
+    public class DataLager
     {
         public string FilePathBrætspil { get; set; } = "Brætspil.txt";// Sti til filen, der gemmer data
+        public string FilePathForespørgsel { get; set; } = "Forespørgsler.txt";// Sti til filen, der gemmer data
 
         public List<Brætspil> BrætspilsListe = new List<Brætspil>();
-       
-        public Lager(string filePathBrætspil)   // Konstruktør placeres typisk mellem felterne ovenover og metoder nedenunder.
+        public  List<Forespørgsel> ForespørgselsListe = new List<Forespørgsel>(); //Til forespørgsler
+
+        public DataLager(string filePathBrætspil, string filePathForespørgsel)   // Konstruktør placeres typisk mellem felterne ovenover og metoder nedenunder.
         {
             FilePathBrætspil = filePathBrætspil; // Sætter filstien ved oprettelse af DataHandler
+            FilePathForespørgsel = filePathForespørgsel;
         }
         
         public void SaveBoardGames()
@@ -55,6 +58,46 @@ namespace ProjektGenspil
                     BrætspilsListe.Add(brætspil);
                 }
             }  // Her lukkes tekstfilen. Fordi man nu er ude af kodeblokken.
+        }
+
+        public void GemForespørgsel()
+        {
+            using (StreamWriter sw = new StreamWriter(FilePathForespørgsel))
+            {
+                foreach (Forespørgsel forespørgsel in ForespørgselsListe)
+                {
+                    sw.WriteLine(forespørgsel.ToString());
+                }
+            }
+        }
+
+        public void LoadForespørgsel()
+        {
+
+            if (!File.Exists(FilePathForespørgsel))
+            {
+                GemForespørgsel();
+            }
+            using (StreamReader sr = new StreamReader(FilePathForespørgsel))
+            {
+                while (true)
+                {
+                    string line = sr.ReadLine();
+
+                    if (line == null)
+                    {
+                        break;
+                    }
+                   
+                    if (line == "")
+                    {
+                        continue; // Fortsætter loopet, når der er en linje uden tekst.
+                    }
+
+                    Forespørgsel _forespørgsel = Forespørgsel.FromString(line);
+                    ForespørgselsListe.Add(_forespørgsel);
+                }
+            }
         }
     }
 }
