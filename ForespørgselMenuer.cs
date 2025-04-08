@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ProjektGenspil
 {
-    internal class ForespørgselMenuer
+    public class ForespørgselMenuer
     {
-        Forespørgsel _forespørgsel = new Forespørgsel("Forespørgsel.txt");
+        //Forespørgsel _forespørgsel = new Forespørgsel("Forespørgsel.txt");
         
         public static void ForespørgselMenu()
         {
@@ -52,7 +52,7 @@ namespace ProjektGenspil
             }
         }
 
-        public static void AddForspørgsel() //Tilføj en Forespørgsel. Skal tildeles et ID
+        public void AddForspørgsel() //Tilføj en Forespørgsel. Skal tildeles et ID
         {
             Console.Clear();
 
@@ -78,27 +78,37 @@ namespace ProjektGenspil
 
             }
 
-            forespørgsels.GemForespørgsel();
+            Forespørgsel.GemForespørgsel();
         }
 
         
        
 
-        public static void SeListe()
+        public void SeListe()
         {
+            string fIDPrintList = "".PadRight(7);
+            string fNAVNPrintList = "Navn".PadRight(14);
+            string fTLFPrintList = "TLF".PadRight(12);
+            string fBRÆTSPILPrintList = "Brætspil".PadRight(12);
+
             // Udskriv liste med forespørgsler
             Console.Clear();
             Console.WriteLine("=== Liste over forspørgsler ===");
+            Console.WriteLine($"{fIDPrintList}{fNAVNPrintList}{fTLFPrintList}{fBRÆTSPILPrintList}");
             if (Forespørgsel.forespørgsel.Count == 0)
             {
                 Console.WriteLine("Ingen forespørgsler er blevet oprettet endnu.");
             }
             else
             {
-                foreach (var forespørgsels in Forespørgsel.forespørgsel)
+                for (int i = 0; i < Forespørgsel.forespørgsel.Count; i++)
                 {
-                    Console.WriteLine($"ID: {forespørgsels.Id} \nNavn: {forespørgsels.Kundenavn} \nTlf: {forespørgsels.Tlf}" +
-                        $"\nBrætspil: {forespørgsels.Brætspil}  \n-------------------------------");
+                    //Console.WriteLine($"ID: {forespørgsels.Id} \nNavn: {forespørgsels.Kundenavn} \nTlf: {forespørgsels.Tlf}" +
+                    //$"\nBrætspil: {forespørgsels.Brætspil}  \n-------------------------------");
+                    var forespørgsel =Forespørgsel.forespørgsel[i];
+                    Console.WriteLine($"[{i + 1}] {forespørgsel.fToPrettyString()}");
+
+
 
                 }
             }
@@ -106,7 +116,7 @@ namespace ProjektGenspil
 
         }
 
-        public static void SletForespørgsel()
+        public void SletForespørgsel()
         {
             //Indsæt slet forespørgsel
             Console.WriteLine("Indtast nummeret på den forespørgsel du ønsker at slette");
@@ -132,7 +142,7 @@ namespace ProjektGenspil
             }
         }
 
-        public static void SøgForespørgsel()
+        public void SøgForespørgsel()
         {
             // tilføj søge funktion
             //Spørg bruger hvilket ID han leder efter

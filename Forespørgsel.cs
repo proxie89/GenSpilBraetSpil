@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace ProjektGenspil
 {
-    internal class Forespørgsel
+    public class Forespørgsel
     {
         public int Id { get; private set; }
         public string Kundenavn { get; private set; }
         public int Tlf { get; private set; }
         public string Brætspil { get; private set; }
 
-        public string FilePathforespørgsel { get; set; } = "Forespørgsel.txt";
+        public string FilePathforespørgsel { get; set; } = "Forespørgsler.txt";
 
 
         // Opret konstruktør
@@ -43,6 +43,11 @@ namespace ProjektGenspil
             return Id + " | " + Kundenavn + " | " + Tlf + " | " + Brætspil;
         }
 
+        public string fToPrettyString()
+        {
+            return Id.ToString().PadRight(0) + " | " + Kundenavn.PadRight(10) + " | " + Tlf.ToString().PadRight(10) + " | " + Brætspil;
+        }
+
         public static Forespørgsel FromString(string line)
         {
             string[] lineParts = line.Split(" | ");
@@ -55,9 +60,12 @@ namespace ProjektGenspil
             Forespørgsel _forespørgsel = new Forespørgsel(_id, _kundenavn, _tlf, _brætspil);
             return _forespørgsel;
         }
+
+        
+
         public void GemForespørgsel()
         {
-            using (StreamWriter sw = new StreamWriter(FilePathforespørgsel))
+            using (StreamWriter sw = new StreamWriter("Forespørgsler.txt"))
             {
                 foreach (Forespørgsel forespørgsel in forespørgsel)
                 {
@@ -66,7 +74,7 @@ namespace ProjektGenspil
             }
         }
 
-        public void LoadForespørgsel(string FilePathforespørgsel)
+        public void LoadForespørgsel()
         {
             
             if (!File.Exists(FilePathforespørgsel))
@@ -98,6 +106,8 @@ namespace ProjektGenspil
                 }
             }
         }
+
+        
 
         
     }
