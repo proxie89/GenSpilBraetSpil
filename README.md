@@ -8,4 +8,10 @@ https://lucid.app/lucidchart/ac26ca25-7cdf-4fa9-bb3b-74b8a44d7482/edit?viewport_
 Link til trelloboard:
 
 Dette indeholder vores scrumproces:
+Der er også lagt screenshots op af vores scrumboard i tilfældet af linket driller. 
+
+*Tilføjelse*
+Vi synes at starte godt ud i processen med scrum og rollerne, hvor vi i løbet af projektet mister lidt syne af tiden og dertil scrumdelen. 
+
+
 https://trello.com/b/v4S0fUJd/team-13-genspil
