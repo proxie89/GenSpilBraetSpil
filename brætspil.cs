@@ -66,4 +66,23 @@ namespace ProjektGenspil
             return brætspil;
         }
     }
+
+    public enum Stand
+    {
+        Super = 'A',
+        God = 'B',
+        Rimelig = 'C',
+        Ringe = 'D',
+        Mangelfuld = 'E',
+        Reparation = 'F'
+    }
+
+    public enum Genre
+    {
+        Familiespil,
+        Selskabsspil,
+        Strategispil,
+        Voksenspil,
+        Børnespil
+    }
 }
